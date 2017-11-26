@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Asmuo</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Vardas</th>
+                <td>{{ asmuo.vardas }}</td>
+            </tr>
+            <tr>
+                <th>Pavarde</th>
+                <td>{{ asmuo.pavarde }}</td>
+            </tr>
+            <tr>
+                <th>Elpastas</th>
+                <td>{{ asmuo.elPastas }}</td>
+            </tr>
+            <tr>
+                <th>Asmenskodas</th>
+                <td>{{ asmuo.asmensKodas }}</td>
+            </tr>
+            <tr>
+                <th>Slaptazodis</th>
+                <td>{{ asmuo.slaptazodis }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ asmuo.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('asmuo_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('asmuo_edit', { 'id': asmuo.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

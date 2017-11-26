@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Asmuos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Vardas</th>
+                <th>Pavarde</th>
+                <th>Elpastas</th>
+                <th>Asmenskodas</th>
+                <th>Slaptazodis</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for asmuo in asmuos %}
+            <tr>
+                <td><a href="{{ path('asmuo_show', { 'id': asmuo.id }) }}">{{ asmuo.vardas }}</a></td>
+                <td>{{ asmuo.pavarde }}</td>
+                <td>{{ asmuo.elPastas }}</td>
+                <td>{{ asmuo.asmensKodas }}</td>
+                <td>{{ asmuo.slaptazodis }}</td>
+                <td>{{ asmuo.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('asmuo_show', { 'id': asmuo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('asmuo_edit', { 'id': asmuo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('asmuo_new') }}">Create a new asmuo</a>
+        </li>
+    </ul>
+{% endblock %}

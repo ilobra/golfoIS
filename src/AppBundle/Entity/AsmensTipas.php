@@ -28,6 +28,40 @@ class AsmensTipas
      */
     private $idAsmensTipas;
 
+     /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return AsmensTipas
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Get idAsmensTipas
+     *
+     * @return integer
+     */
+    public function getIdAsmensTipas()
+    {
+        return $this->idAsmensTipas;
+    }
+
 
 }
 

@@ -50,7 +50,7 @@ class RegistrationController extends Controller
 
             $this->addFlash('success', 'Registracija sėkminga!');
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('startpage');
         }
 
         return $this->render('registration/register.html.twig',

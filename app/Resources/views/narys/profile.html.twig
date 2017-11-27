@@ -1,0 +1,38 @@
+{% extends "::usermenu.html.twig" %}
+
+{% block title %}Paskyra{% endblock %}
+
+{% block body %}
+<div class="box" style="text-align:center" >
+        <div class="div1 " >
+            <h2 class="divTitle">Paskyros duomenys:</h2>
+
+                <p class="divContent" >Vardas:</p>
+                <input type="text" id="vardas" class="divfield" name="vardas" value="{{ asmuo.getVardas() }}" disabled/>
+
+                <p class="divContent" >Pavardė:</p>
+                <input type="text" id="pavarde" class="divfield" name="pavarde" value="{{ asmuo.getPavarde() }}" disabled/>
+
+               <p class="divContent" >El. paštas:</p>
+                <input type="text" id="elPastas" class="divfield" name="elPastas" value="{{ asmuo.getElPastas() }}" disabled/>
+
+                <p class="divContent" >Asmens kodas:</p>
+                <input type="text" id="asmensKodas" class="divfield" name="asmensKodas" value="{{ asmuo.getAsmensKodas() }}" disabled/>
+
+                <p class="divContent" >Banko kortelės nr:</p>
+                <input type="text" id="bankoKortNumeris" class="divfield" name="bankoKortNumeris" value="{{ narys.getBankoKortNumeris() }}" disabled/> <br><br>
+
+            <form action="{{ path('profile_edit', {'id': asmuo.getId()}) }}">
+                <input type="submit" value="Redaguoti paskyrą" />
+            </form>
+            <form action="{{ path('profile_bank_edit', {'id': asmuo.getId()}) }}">
+                <input type="submit" value="Redaguoti banko duomenis" />
+            </form>
+
+
+{# <p><a style="position: absolute; bottom: 80px; display: block; margin-left: 20px;" role="button" class="btn btn-info btn-lg" href="{{ path('profile_edit', {'id': asmuo.getId()}) }}">Redaguoti paskyrą</a></p>
+
+<p><a style="position: absolute; bottom: 80px; display: block; margin-left: 20px;" role="button" class="btn btn-info btn-lg" href="{{ path('profile_bank_edit', {'id': asmuo.getId()}) }}">Redaguoti banko duomenis</a></p> #}
+        </div>
+    </div>
+{% endblock %}

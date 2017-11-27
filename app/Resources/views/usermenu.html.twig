@@ -1,0 +1,42 @@
+{% block head %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/homepage">Golfo klubo IS</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left">
+                <li><form class="navbar-form navbar-left">
+                        <a href="{{ path('homepage') }}" role="button" class="btn btn-info" style="width: 80px">Pradžia</a>
+                         <a href="{{ path('profile') }}" role="button" class="btn btn-info" style="width: 80px">Paskyra</a>
+                          {# <a href="{{ path('history') }}" role="button" class="btn btn-info" style="width: 80px">Žaidimų istorija</a>
+                         <a href="{{ path('tournments') }}" role="button" class="btn btn-info" style="width: 80px">Turnyrai</a>
+                          <a href="{{ path('reservartion') }}" role="button" class="btn btn-info" style="width: 80px">Rezervacijos</a>
+                           <a href="{{ path('equipment') }}" role="button" class="btn btn-info" style="width: 80px">Įranga</a> #}
+                        <a href="/logout" role="button" class="btn btn-info" style="width: 80px">Atsijungti</a>
+                    </form></li>
+            </ul>
+        </div>
+            <!-- /.navbar-collapse -->
+
+        <div class="collapse navbar-collapse" id="userlogin">
+
+        </div>
+    </nav>
+
+{% endblock %}
+ <title>{% block title %}Golfo klubo IS{% endblock %}</title>
+<body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>

@@ -1,0 +1,14 @@
+{% extends "usermenu.html.twig" %}
+
+{% block body %}
+    <h1>Paskyros redagavimas</h1>
+
+    {{ form_start(edit_form) }}
+    {{ form_widget(edit_form) }}
+    <input type="submit" value="Redaguoti" />
+    {{ form_end(edit_form) }}
+            <form action="{{ path('profile') }}">
+                <input type="submit" value="Grįžti atgal" />
+            </form>
+
+{% endblock %}

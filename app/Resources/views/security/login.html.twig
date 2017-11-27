@@ -24,7 +24,7 @@
 {% block body %}
     <div class="container">
         <form class="form-signin" action="{{ path("login") }}" method="POST">
-            <h2 class="form-signin-heading" >Sign in to TodoList</h2>
+            <h2 class="form-signin-heading" >Prisijungimas</h2>
 
             <label for="_username" >El. paštas:</label>
             <input type="text"
@@ -42,7 +42,7 @@
                    name="_password"
                    required/>
 
-            <button class="btn btn-lg btn-info btn-block" style="margin-top: 25px" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-info btn-block" style="margin-top: 25px" type="submit">Prisijungti</button>
         </form>
 
         {% if error %}

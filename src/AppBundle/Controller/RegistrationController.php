@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Form\RegistrationType;
 use AppBundle\Entity\Asmuo;
+use AppBundle\Entity\Narys;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,7 @@ class RegistrationController extends Controller
     public function registerAction(Request $request)
     {
         $user = new Asmuo();
+        $member = new Narys();
 
         $form = $this->createForm(RegistrationType::class, $user, [
         ]);
@@ -30,9 +32,20 @@ class RegistrationController extends Controller
 
             $user->setPassword($password);
 
-
             $em = $this->getDoctrine()->getManager();
+            // nustatomas nario asmens tipas (id=5)
+            $tipas = $em ->getRepository('AppBundle:AsmensTipas')
+                         ->find(5); //default: member
+            $user->setTipas($tipas);
+            
             $em->persist($user);
+            $em->flush();
+
+            $id = $user->getId();
+            $memberId = $em ->getRepository('AppBundle:Asmuo')
+                            ->find($id); //default: member id
+            $member->setId($memberId);
+            $em->persist($member);
             $em->flush();
 
             $this->addFlash('success', 'Registracija sėkminga!');

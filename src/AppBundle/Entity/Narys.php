@@ -41,6 +41,77 @@ class Narys
      */
     private $fkKomandaid;
 
+    /**
+     * Set bankoKortNumeris
+     *
+     * @param string $bankoKortNumeris
+     *
+     * @return Narys
+     */
+    public function setBankoKortNumeris($bankoKortNumeris)
+    {
+        $this->bankoKortNumeris = $bankoKortNumeris;
+
+        return $this;
+    }
+
+    /**
+     * Get bankoKortNumeris
+     *
+     * @return string
+     */
+    public function getBankoKortNumeris()
+    {
+        return $this->bankoKortNumeris;
+    }
+
+    /**
+     * Set id
+     *
+     * @param \AppBundle\Entity\Asmuo $id
+     *
+     * @return Narys
+     */
+    public function setId(\AppBundle\Entity\Asmuo $id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get id
+     *
+     * @return \AppBundle\Entity\Asmuo
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set fkKomandaid
+     *
+     * @param \AppBundle\Entity\Komanda $fkKomandaid
+     *
+     * @return Narys
+     */
+    public function setFkKomandaid(\AppBundle\Entity\Komanda $fkKomandaid = null)
+    {
+        $this->fkKomandaid = $fkKomandaid;
+
+        return $this;
+    }
+
+    /**
+     * Get fkKomandaid
+     *
+     * @return \AppBundle\Entity\Komanda
+     */
+    public function getFkKomandaid()
+    {
+        return $this->fkKomandaid;
+    }
 
 }
 

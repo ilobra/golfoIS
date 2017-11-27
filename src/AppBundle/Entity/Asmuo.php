@@ -4,12 +4,15 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Asmuo
  *
  * @ORM\Table(name="Asmuo", indexes={@ORM\Index(name="tipas", columns={"tipas"})})
  * @ORM\Entity
+  * @UniqueEntity(fields={"asmensKodas"}, message="Toks vartotojas jau egzistuoja!")
+ * @UniqueEntity(fields={"elPastas"}, message="Vartotojas, su tokiu el. paštu, jau egzistuoja!")
  */
 class Asmuo implements UserInterface
 {

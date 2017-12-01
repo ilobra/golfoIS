@@ -17,7 +17,6 @@ class Turnyras
      *
      * @ORM\Column(name="id", type="string", length=255)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -40,6 +39,72 @@ class Turnyras
      * })
      */
     private $fkZaidimoRezervacijaid;
+
+    /**
+     * Get id
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * Set fkZaidimoRezervacijaid
+     *
+     * @param \AppBundle\Entity\ZaidimoRezervacija $fkZaidimoRezervacijaid
+     *
+     * @return Turnyras
+     */
+    public function setFkZaidimoRezervacijaid(\AppBundle\Entity\ZaidimoRezervacija $fkZaidimoRezervacijaid = null)
+    {
+        $this->fkZaidimoRezervacijaid = $fkZaidimoRezervacijaid;
+
+        return $this;
+    }
+
+    /**
+     * Get fkZaidimoRezervacijaid
+     *
+     * @return \AppBundle\Entity\ZaidimoRezervacija
+     */
+    public function getFkZaidimoRezervacijaid()
+    {
+        return $this->fkZaidimoRezervacijaid;
+    }
+
+    /**
+     * Set fkNarysid
+     *
+     * @param \AppBundle\Entity\Narys $fkNarysid
+     *
+     * @return Turnyras
+     */
+    public function setFkNarysid(\AppBundle\Entity\Narys $fkNarysid = null)
+    {
+        $this->fkNarysid = $fkNarysid;
+
+        return $this;
+    }
+
+    /**
+     * Get fkNarysid
+     *
+     * @return \AppBundle\Entity\Narys
+     */
+    public function getFkNarysid()
+    {
+        return $this->fkNarysid;
+    }
 
 
 }

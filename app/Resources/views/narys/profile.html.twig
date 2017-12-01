@@ -3,36 +3,38 @@
 {% block title %}Paskyra{% endblock %}
 
 {% block body %}
-<div class="box" style="text-align:center" >
-        <div class="div1 " >
-            <h2 class="divTitle">Paskyros duomenys:</h2>
+<div style="padding-left: 30px">
+    <div class="box" style="padding-left:30px; width:40%; border:1px solid #750b20; display:block; margin: auto">
+             <center><b><h2 class="divTitle">JŪSŲ DUOMENYS</h2></b></center>
+             <div class="form-group">
+                <b><p class="divContent" >Vardas:</p></b>
+                <input type="text" id="vardas" style="width:200px" class="form-control" name="vardas" value="{{ asmuo.getVardas() }}" disabled/><br>
 
-                <p class="divContent" >Vardas:</p>
-                <input type="text" id="vardas" class="divfield" name="vardas" value="{{ asmuo.getVardas() }}" disabled/>
+                <b><p class="divContent" >Pavardė:</p></b>
+                <input type="text" id="pavarde" style="width:200px" class="form-control" name="pavarde" value="{{ asmuo.getPavarde() }}" disabled/><br>
 
-                <p class="divContent" >Pavardė:</p>
-                <input type="text" id="pavarde" class="divfield" name="pavarde" value="{{ asmuo.getPavarde() }}" disabled/>
+                <b><p class="divContent" >El. paštas:</p></b>
+                <input type="text" id="elPastas" style="width:200px" class="form-control" name="elPastas" value="{{ asmuo.getElPastas() }}" disabled/><br>
 
-               <p class="divContent" >El. paštas:</p>
-                <input type="text" id="elPastas" class="divfield" name="elPastas" value="{{ asmuo.getElPastas() }}" disabled/>
+                <b><p class="divContent" >Asmens kodas:</p></b>
+                <input type="text" id="asmensKodas" style="width:200px" class="form-control" name="asmensKodas" value="{{ asmuo.getAsmensKodas() }}" disabled/><br>
 
-                <p class="divContent" >Asmens kodas:</p>
-                <input type="text" id="asmensKodas" class="divfield" name="asmensKodas" value="{{ asmuo.getAsmensKodas() }}" disabled/>
-
-                <p class="divContent" >Banko kortelės nr:</p>
-                <input type="text" id="bankoKortNumeris" class="divfield" name="bankoKortNumeris" value="{{ narys.getBankoKortNumeris() }}" disabled/> <br><br>
+                <b><p class="divContent" >Banko kortelės nr:</p></b>
+                <input type="text" id="bankoKortNumeris" style="width:200px" class="form-control" name="bankoKortNumeris" value="{{ narys.getBankoKortNumeris() }}" disabled/> <br><br>
 
             <form action="{{ path('profile_edit', {'id': asmuo.getId()}) }}">
-                <input type="submit" value="Redaguoti paskyrą" />
+                <input type="submit"  class="btn btn-info" value="Redaguoti paskyrą" />
             </form>
             <form action="{{ path('profile_bank_edit', {'id': asmuo.getId()}) }}">
-                <input type="submit" value="Redaguoti banko duomenis" />
+                <input type="submit"  class="btn btn-info" value="Redaguoti banko duomenis" />
             </form>
 
-
-{# <p><a style="position: absolute; bottom: 80px; display: block; margin-left: 20px;" role="button" class="btn btn-info btn-lg" href="{{ path('profile_edit', {'id': asmuo.getId()}) }}">Redaguoti paskyrą</a></p>
-
-<p><a style="position: absolute; bottom: 80px; display: block; margin-left: 20px;" role="button" class="btn btn-info btn-lg" href="{{ path('profile_bank_edit', {'id': asmuo.getId()}) }}">Redaguoti banko duomenis</a></p> #}
         </div>
+
+            <center><b> <a  href={{ path('reservationsUser', {'id': asmuo.getId()}) }}>MANO REZERVACIJOS -> </a> <br><br>
+             <a  href={{ path('tournmentsUser', {'id': asmuo.getId()}) }}>MANO TURNYRAI -> </a> <br><br>
+             <a  href={{ path('equipmentUser', {'id': asmuo.getId()}) }}>MANO ĮRANGA -> </a> <br><br> </b></center>
+
     </div>
+</div>
 {% endblock %}

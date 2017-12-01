@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Narys
@@ -14,7 +15,7 @@ class Narys
 {
     /**
      * @var string
-     *
+     * 
      * @ORM\Column(name="banko_kort_numeris", type="string", length=20, nullable=false)
      */
     private $bankoKortNumeris;

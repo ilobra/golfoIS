@@ -28,6 +28,32 @@ class Aikstynas
      */
     private $id;
 
+    public function setAikstynoInfo($aikstynoInfo)
+    {
+        $this->aikstynoInfo = $aikstynoInfo;
 
+        return $this;
+    }
+
+    /**
+     * Get aikstynoInfo
+     *
+     * @return string
+     */
+    public function getAikstynoInfo()
+    {
+        return $this->aikstynoInfo;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }
+
 

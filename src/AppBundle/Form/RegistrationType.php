@@ -22,23 +22,27 @@ class RegistrationType extends AbstractType
         $builder
             ->add('vardas', TextType::class, [
                 'label'=> 'Jūsų vardas*',
-                'required' => true
+                'required' => true,
+                'attr' => array('class'=>'form-control', 'style'=>'width:40%')
             ])
             ->add('pavarde', TextType::class, [
                 'label'=> 'Jūsų pavardė*',
-                'required' => true
+                'required' => true,
+                'attr' => array('class'=>'form-control', 'style'=>'width:40%')
             ])
             ->add('asmensKodas', TextType::class, [
                 'label'=> 'Asmens kodas*',
-                'required' => true
+                'required' => true,
+                'attr' => array('class'=>'form-control', 'style'=>'width:40%')
             ])
             ->add('elPastas', EmailType::class, [
-                'label'=> 'El. paštas*'
+                'label'=> 'El. paštas*',
+                'attr' => array('class'=>'form-control', 'style'=>'width:40%')
             ])
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options'  => [ 'label' => 'Slaptažodis*' ],
-                'second_options' => [ 'label' => 'Pakartoti slaptažodį*' ]
+                'first_options'  => [ 'label' => 'Slaptažodis*', 'attr' => array('class'=>'form-control', 'style'=>'width:40%') ],
+                'second_options' => [ 'label' => 'Pakartoti slaptažodį*', 'attr' => array('class'=>'form-control', 'style'=>'width:40%') ]
             ))
             ->add('register', SubmitType::class, [
                 'attr'=> [

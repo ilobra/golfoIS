@@ -1,0 +1,103 @@
+{% extends "::usermenu.html.twig" %}
+
+{% block title %}Rezervacijos{% endblock %}
+
+{% block body %}
+
+{% block content %}
+    <a  href={{ path('reservation')}} > <- Grįžti atgal</a>
+    <center>
+        <div style="width:50%">
+
+            <h3 class="divTitle">ŠIOS DIENOS REZERVACIJOS</h3>
+            <p> Rezervuoti aikštyną galima maksimaliai 3 valandoms: 8-11 arba 12-15. </p><br>
+        
+{# -------------------------------------- RYTINIO LAIKO REZERVACIJOS -------------------------------------- #}
+        {% if kiekisRyt == 0 %}
+        <table class="table table-striped">
+            <thead>
+            <th>DATA</th>
+            <th>LAIKAS</th>
+            <th>AIKŠTYNO INFORMACIJA</th>
+            </thead>
+
+            {% for aikstynas in aikstynai %}
+            <thead>
+            <td> {{ data|date('Y-m-d') }}</td>
+            <td> {{ laikasRyt|date('H:i:s') }} - {{ laikasRyt1|date('H:i:s') }}</td>
+            <td> {{ aikstynas.aikstynoInfo }}</td>
+            <td> <a  onclick="return confirm('Ar tikrai norite rezervuoti šį laiką?')" href={{ path('reservation_add', {'aikstynoid': aikstynas.id, 'data': data, 'laikasPr': laikasRyt, 'laikasPab': laikasRyt1}) }}>REZERVUOTI</a></td>
+            </thead>
+            {% endfor %}  
+
+        {% else %}
+        <table class="table table-striped">
+            <thead>
+            <th>DATA</th>
+            <th>LAIKAS</th>
+            <th>AIKŠTYNO INFORMACIJA</th>
+            </thead>
+
+            {% for aikstynas in aikstynai %}
+                {% for rezultatas in rezultatai %}
+            {% if aikstynas.aikstynoInfo != rezultatas.aikstynoInfo %}
+            <thead>
+            <td> {{ data|date('Y-m-d') }}</td>
+            <td> {{ laikasRyt|date('H:i:s') }} - {{ laikasRyt1|date('H:i:s') }}</td>
+            <td> {{ aikstynas.aikstynoInfo }}</td>
+            <td> <a  onclick="return confirm('Ar tikrai norite rezervuoti šį laiką?')" href={{ path('reservation_add', {'aikstynoid': aikstynas.id, 'data': data, 'laikasPr': laikasRyt, 'laikasPab': laikasRyt1}) }}>REZERVUOTI</a></td>
+            </thead>
+            {% endif %}
+                {% endfor %}
+            {% endfor %}
+
+        {% endif %}
+        </table> 
+
+{# -------------------------------------- DIENINIO LAIKO REZERVACIJOS -------------------------------------- #}
+           {% if kiekisDien == 0 %}
+        <table class="table table-striped">
+            <thead>
+            <th>DATA</th>
+            <th>LAIKAS</th>
+            <th>AIKŠTYNO INFORMACIJA</th>
+            </thead>
+
+            {% for aikstynas in aikstynai %}
+            <thead>
+            <td> {{ data|date('Y-m-d') }}</td>
+            <td> {{ laikasDien|date('H:i:s') }} - {{ laikasDien1|date('H:i:s') }}</td>
+            <td> {{ aikstynas.aikstynoInfo }}</td>
+            <td> <a  onclick="return confirm('Ar tikrai norite rezervuoti šį laiką?')" href={{ path('reservation_add', {'aikstynoid': aikstynas.id, 'data': data|date('Y-m-d'), 'laikasPr': laikasDien, 'laikasPab': laikasDien1}) }}>REZERVUOTI</a></td>
+            </thead>
+            {% endfor %}  
+
+        {% else %}
+        <table class="table table-striped">
+            <thead>
+            <th>DATA</th>
+            <th>LAIKAS</th>
+            <th>AIKŠTYNO INFORMACIJA</th>
+            </thead>
+
+            {% for aikstynas in aikstynai %}
+                {% for rezultatas in rezultatai1 %}
+            {% if aikstynas.aikstynoInfo != rezultatas.aikstynoInfo %}
+            <thead>
+            <td> {{ data|date('Y-m-d') }}</td>
+            <td> {{ laikasDien|date('H:i:s') }} - {{ laikasDien1|date('H:i:s') }}</td>
+            <td> {{ aikstynas.aikstynoInfo }}</td>
+            <td> <a  onclick="return confirm('Ar tikrai norite rezervuoti šį laiką?')" href={{ path('reservation_add', {'aikstynoid': aikstynas.id, 'data': data, 'laikasPr': laikasDien, 'laikasPab': laikasDien1}) }}>REZERVUOTI</a></td>
+            </thead>
+            {% endif %}
+                {% endfor %}
+            {% endfor %}
+
+        {% endif %}
+        </table> 
+    </div>
+</center>
+<br>
+ </div>
+{% endblock %}
+{% endblock %}

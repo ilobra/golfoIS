@@ -1,0 +1,103 @@
+{% extends "::usermenu.html.twig" %}
+
+{% block title %}Rezervacijos{% endblock %}
+
+{% block body %}
+
+{% block content %}
+    <center>
+        <div style="width:50%">
+
+            <h3 class="divTitle">ŠIOS DIENOS REZERVACIJOS</h3>
+            <p> Rezervuoti aikštyną galima maksimaliai 3 valandoms: 8-11 arba 12-15. </p><br>
+        
+            {% if kiekis != 0 %}
+            <table class="table table-striped">
+            <thead>
+            <th>DATA</th>
+            <th>LAIKAS</th>
+            <th>AIKŠTYNO INFORMACIJA</th>
+            </thead>
+
+            {% for rezultatas in rezultatai %}
+            <thead>
+            <td> {{ rezultatas.data|date('Y-m-d') }}</td>
+            <td> {{ rezultatas.pradziosLaikas|date('H:i:s') }} - {{ rezultatas.pabaigosLaikas|date('H:i:s') }}</td>
+            <td> {{ rezultatas.aikstynoInfo }}</td>
+            </thead>
+            {% endfor %}
+        </table>
+        {% else %}
+                <h3> Šiandien aikštynų niekas nerezervavo.</h3>
+        {% endif %}
+    </div>
+</center>
+
+
+        <br>
+    <center>
+        <form method="post" action="{{ path('reservation_date', {'id': asmuo.getId()}) }}">
+            <h3> Norite rezervuotis aikštyną žaidimui? </h3>
+            <label for="datepicker">Pasirinkite datą:</label>
+            <input type="text" class="form-control" id="datepicker" name="datepicker" style="width:200px" required=true><br>
+
+            <input type="submit" class="btn btn-info" value="Surasti laisvus laikus" />
+        </form>
+    </center>
+            
+            {# <center>
+                <form action="{{ path('reservation_date', {'id': asmuo.getId()}) }}">
+                    
+                </form>
+            </center> #}
+
+        </div>
+{% endblock %}
+
+ {# $username = $request->request->get('_username'); #}
+<style>
+table.ui-datepicker-calendar{
+    border: 2px solid black;
+    background-color: #eff5f5;
+    padding: 10px;
+    border-spacing: 10px;
+    border-collapse: separate;
+    width: 100%;
+}
+
+.ui-datepicker-title {
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold; 
+    padding: 2px;
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+     border-bottom: 2px solid black;
+    background-color: #bfd9d9;
+    height: 35px;
+}
+
+.ui-datepicker-header{
+    background:-color: white;
+}
+
+.ui-datepicker-prev {
+    margin:auto;
+    float: left;
+    cursor: pointer;
+    background-position: center -30px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.ui-datepicker-next {
+    float: right;
+    cursor: pointer;
+    background-position: center 0px;
+    font-weight: bold;
+    padding: 10px;
+}
+</style>
+
+{% endblock %}

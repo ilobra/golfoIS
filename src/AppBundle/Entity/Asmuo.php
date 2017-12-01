@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Asmuo
@@ -18,7 +19,10 @@ class Asmuo implements UserInterface
 {
     /**
      * @var string
-     *
+     * @Assert\Length(
+     *      max = 30,
+     *      maxMessage = "Vardas negali viršyti {{ limit }} simbolių!"
+     * )
      * @ORM\Column(name="vardas", type="string", length=30, nullable=true)
      */
     private $vardas;
@@ -26,6 +30,10 @@ class Asmuo implements UserInterface
     /**
      * @var string
      *
+     * @Assert\Length(
+     *      max = 40,
+     *      maxMessage = "Pavardė negali viršyti {{ limit }} simbolių!"
+     * )
      * @ORM\Column(name="pavarde", type="string", length=40, nullable=true)
      */
     private $pavarde;
@@ -33,6 +41,10 @@ class Asmuo implements UserInterface
     /**
      * @var string
      *
+     * @Assert\Length(
+     *      max = 50,
+     *      maxMessage = "El. paštas negali viršyti {{ limit }} simbolių!"
+     * )
      * @ORM\Column(name="el_pastas", type="string", length=50, nullable=false)
      */
     private $elPastas;
@@ -40,10 +52,22 @@ class Asmuo implements UserInterface
     /**
      * @var string
      *
+     * @Assert\Length(
+     *      max = 11,
+     *      maxMessage = "Asmens kodas negali viršyti {{ limit }} simbolių!"
+     * )
      * @ORM\Column(name="asmens_kodas", type="string", length=11, nullable=false)
      */
     private $asmensKodas;
 
+    /**
+     * @var string
+     *
+     * @Assert\Length(
+     *      min = 6,
+     *      minMessage = "Slaptažodis negali būti trumpesnis nei {{ limit }} simboliai!"
+     * )
+     */
     private $plainPassword;
     /**
      * @var string

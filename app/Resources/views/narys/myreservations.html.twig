@@ -1,0 +1,38 @@
+{% extends "::usermenu.html.twig" %}
+
+{% block title %}Rezervacijos{% endblock %}
+
+{% block body %}
+
+{% block content %}
+    <a  href={{ path('profileUser', {'id': asmuo.id}) }} > <- Grįžti atgal</a>
+    <center>
+        <div style="width:50%">
+            <h3 class="divTitle">JŪSŲ REZERVACIJOS</h3><br>
+
+        
+            {% if kiekis != 0 %}
+            <table class="table table-striped">
+            <thead>
+            <th>DATA</th>
+            <th>LAIKAS</th>
+            <th>AIKŠTYNO INFORMACIJA</th>
+            </thead>
+                {% for rezervacija in rezervacijos %}
+                <thead>
+                <td> {{ rezervacija.data|date('Y-m-d')}}</td>
+                <td> {{ rezervacija.pradziosLaikas|date('H:i:s') }} - {{ rezervacija.pabaigosLaikas|date('H:i:s') }}</td>
+                <td> {{ rezervacija.aikstynoInfo }}</td>
+                <td>
+                    <a  href={{ path('reservation_delete', {'id': rezervacija.id}) }} onclick="return confirm('Ar tikrai norite panaikinti rezervaciją?')">NAIKINTI</a>
+                </td>
+                </thead>
+                {% endfor %}
+            {% else %}
+                <h3> Kol kas rezervacijų dar neatlikote. Norite rezervuoti laiką? <a href="{{ path('reservation') }}">Keliaukite -></a> </h3>
+            {% endif %}
+        </table>
+    </div>
+</center>
+{% endblock %}
+{% endblock %}

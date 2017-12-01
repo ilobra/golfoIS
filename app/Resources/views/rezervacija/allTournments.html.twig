@@ -1,0 +1,69 @@
+{% extends "::usermenu.html.twig" %}
+
+{% block title %}Turnyrai{% endblock %}
+
+{% block body %}
+
+{% block content %}
+    <center>
+        <div style="width:50%">
+
+            <h3 class="divTitle">ORGANIZUOJAMI TURNYRAI</h3>
+            <p> Turnyrai gali vykti kasdien nuo 16:00.</p><br>
+        
+        {% if (kiekis != 0) and (kiekis1 != 0) %}
+            <table class="table table-striped">
+            <thead>
+            <th>DATA</th>
+            <th>LAIKAS</th>
+            <th>PAVADINIMAS</th>
+            <th>AIKŠTYNO INFORMACIJA</th>
+            </thead>
+
+            {% for rezultatas in rezultatai %}
+            {% for turnyras in turnyrai %}
+            <thead>
+            <td> {{ rezultatas.data|date('Y-m-d') }}</td>
+            <td> {{ rezultatas.pradziosLaikas|date('H:i:s') }} - {{ rezultatas.pabaigosLaikas|date('H:i:s') }}</td>
+            <td> {{ rezultatas.pavadinimas }}</td>
+            <td> {{ rezultatas.aikstynoInfo }}</td>
+            {% if turnyras.id == rezultatas.id %}
+                            <td><i> Jau dalyvaujate</i></td>
+            {% else %}
+                <td> <a  onclick="return confirm('Ar tikrai norite dalyvauti turnyre?')" href={{ path('tournment_add', {'rezervacijosid': rezultatas.id}) }}>DALYVAUTI</a> </td>
+            {% endif %}
+            </thead>
+            {% endfor %}
+            {% endfor %}
+        {% elseif kiekis != 0 %}
+            <table class="table table-striped">
+            <thead>
+            <th>DATA</th>
+            <th>LAIKAS</th>
+            <th>PAVADINIMAS</th>
+            <th>AIKŠTYNO INFORMACIJA</th>
+            </thead>
+
+            {% for rezultatas in rezultatai %}
+            <thead>
+            <td> {{ rezultatas.data|date('Y-m-d') }}</td>
+            <td> {{ rezultatas.pradziosLaikas|date('H:i:s') }} - {{ rezultatas.pabaigosLaikas|date('H:i:s') }}</td>
+            <td> {{ rezultatas.pavadinimas }}</td>
+            <td> {{ rezultatas.aikstynoInfo }}</td>
+            <td> <a  onclick="return confirm('Ar tikrai norite dalyvauti turnyre?')" href={{ path('tournment_add', {'rezervacijosid': rezultatas.id}) }}>DALYVAUTI</a> </td>
+            </thead>
+            {% endfor %}
+        </table>
+        {% else %}
+                <h3> Šiuo metu nėra rengiamų turnyrų</h3>
+        {% endif %}
+    </div>
+</center>
+
+
+        <br>
+   
+
+        </div>
+{% endblock %}
+{% endblock %}

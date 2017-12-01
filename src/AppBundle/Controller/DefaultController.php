@@ -13,7 +13,25 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
+        // jei vartotojas jau prisijungęs
+        if ($this->getUser()!==null){
+            $userid = $this->getUser()->getId();
+            $em = $this->getDoctrine()->getManager();
+            // ----- surandamas Asmuo pagal ID -----
+            $user = $em ->getRepository('AppBundle:Asmuo')
+                         ->find($userid); 
+            $type = $user->getTipas();
+        
+            // ----- nustatomas asmens tipas -----
+            $types = $em ->getRepository('AppBundle:AsmensTipas')
+                      ->find($type); //default: member
+            $userType = $types->getIdAsmensTipas();
+
+            // šitoj vietoj susidėtų visi vartotojų tipai
+            if ($userType==5) return $this->redirectToRoute('homepageUser', [ 'id' => $userid ]);
+         }
+
+        // jei dar ne
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);

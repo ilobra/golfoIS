@@ -21,24 +21,29 @@ class NarysAType extends AbstractType
     {
         $builder
             ->add('vardas', TextType::class, [
-                'label'=> 'Jūsų vardas*',
-                'required' => true
+                'label'=> 'Jūsų vardas:* ',
+                'required' => true,
+                'attr' => array('class'=>'form-control', 'style'=>'width:40%', 'maxlength' => '30', 'placeholder'=>'Max 30 simbolių')
             ])
             ->add('pavarde', TextType::class, [
-                'label'=> 'Jūsų pavardė*',
-                'required' => true
+                'label'=> 'Jūsų pavardė:* ',
+                'required' => true,
+                'attr' => array('class'=>'form-control', 'style'=>'width:40%', 'maxlength' => '40', 'placeholder'=>'Max 40 simbolių')
             ])
             ->add('asmensKodas', TextType::class, [
-                'label'=> 'Asmens kodas*',
-                'required' => true
+                'label'=> 'Asmens kodas:* ',
+                'required' => true,
+                'attr' => array('class'=>'form-control', 'style'=>'width:40%', 'maxlength' => '11', 'placeholder'=>'Max 11 simbolių')
             ])
             ->add('elPastas', EmailType::class, [
-                'label'=> 'El. paštas*'
+                'label'=> 'El. paštas:* ',
+                'disabled'=> true,
+                'attr' => array('class'=>'form-control', 'style'=>'width:40%', 'maxlength' => '50', 'placeholder'=>'Max 50 simbolių')
             ])
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options'  => [ 'label' => 'Naujas slaptažodis*' ],
-                'second_options' => [ 'label' => 'Pakartoti slaptažodį*' ]
+                'first_options'  => [ 'label' => 'Naujas slaptažodis:* ', 'attr' => array('class'=>'form-control', 'style'=>'width:40%; background-color:#f8b9c6') ],
+                'second_options' => [ 'label' => 'Pakartoti slaptažodį:* ', 'attr' => array('class'=>'form-control', 'style'=>'width:40%; background-color:#f8b9c6') ]
             ))
         ;
     }

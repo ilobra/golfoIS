@@ -5,22 +5,15 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class NarysBType extends AbstractType
+class AikstynasType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-         $builder
-            ->add('bankoKortNumeris', TextType::class, [
-                'label'=> 'Banko kortelės numeris:* ',
-                'required' => true,
-                'attr' => array('class'=>'form-control', 'style'=>'width:40%', 'maxlength' => '20', 'placeholder'=>'Max 20 simbolių')
-            ]);
+        $builder->add('aikstynoInfo');
     }
     
     /**
@@ -29,7 +22,7 @@ class NarysBType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Narys'
+            'data_class' => 'AppBundle\Entity\Aikstynas'
         ));
     }
 
@@ -38,7 +31,7 @@ class NarysBType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_narys';
+        return 'appbundle_aikstynas';
     }
 
 

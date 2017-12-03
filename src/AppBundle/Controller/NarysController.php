@@ -157,6 +157,7 @@ class NarysController extends Controller
             		SELECT r.id, r.raundas, r.musimuSk, a.aikstynoInfo
             		FROM AppBundle:Rezultatas r, AppBundle:Aikstynas a
             		WHERE r.fkNarysid = :userid AND r.fkAikstynasid = a.id
+                    ORDER BY r.id DESC
             ')->setParameter('userid', $userid)->setMaxResults(5);
 
 		 $results = $sql->getResult();
@@ -412,10 +413,28 @@ class NarysController extends Controller
         $userAsMember = $em ->getRepository('AppBundle:Narys')
                          ->find($userid); 
 
+         $sql = $em->createQuery('
+                    SELECT i.kokybe, ia.isnuomojimoPradzia, ia.isnuomojimoPabaiga, ia.suma, it.name as tipas
+                    FROM AppBundle:Iranga i, AppBundle:IrangosTipas it, AppBundle:IrangosApmokejimas ia
+                    WHERE ia.isnuomojimoPabaiga>=CURRENT_DATE() AND i.tipas=it.idIrangosTipas AND i.id=ia.fkIrangaid AND ia.fkNarysid=:id')->setParameter('id', $userid);
 
-        return $this->render('narys/profile.html.twig', array(
+
+         $equipment = $sql->getResult();
+
+         $sql = $em->createQuery('
+                    SELECT COUNT(ia.id) AS kiekis
+                    FROM AppBundle:Iranga i, AppBundle:IrangosTipas it, AppBundle:IrangosApmokejimas ia
+                    WHERE ia.isnuomojimoPabaiga>=CURRENT_DATE() AND i.tipas=it.idIrangosTipas AND i.id=ia.fkIrangaid AND ia.fkNarysid=:id')->setParameter('id', $userid);
+
+         $countArray = $sql->getResult();
+         $count = $countArray[0]['kiekis'];
+
+
+        return $this->render('narys/myequipment.html.twig', array(
                 'asmuo' => $user,
                 'narys' => $userAsMember,
+                'iranga' => $equipment,
+                'kiekis' => $count,
             ));
 
 

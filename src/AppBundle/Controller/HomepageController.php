@@ -33,7 +33,9 @@ class HomepageController extends Controller
 
         // šitoj vietoj susidėtų visi vartotojų tipai
         if ($userType==5) return $this->redirectToRoute('homepageUser', [ 'id' => $userid ]);
-        //else return $this->redirectToRoute('homepage');
+        else return $this->render('default/index.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ]);
     }
 
      /**

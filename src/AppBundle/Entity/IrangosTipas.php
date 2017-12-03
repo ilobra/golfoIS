@@ -28,6 +28,38 @@ class IrangosTipas
      */
     private $idIrangosTipas;
 
+     /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return IrangosTipas
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
 
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Get idIrangosTipas
+     *
+     * @return integer
+     */
+    public function getIdIrangosTipas()
+    {
+        return $this->idIrangosTipas;
+    }
 }
 

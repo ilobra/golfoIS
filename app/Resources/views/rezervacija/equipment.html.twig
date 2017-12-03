@@ -1,0 +1,75 @@
+{% extends "::usermenu.html.twig" %}
+
+{% block title %}Įranga{% endblock %}
+
+{% block body %}
+{% block content %}
+
+    <center>
+        <div style="width:50%">
+
+            <h3 class="divTitle">ĮRANGOS TIPAI</h3><br><br>
+            <p><b>Kaina:</b> {{ kaina }} €</p>
+            <p> {{ antraste }} </p><br><br>
+        
+{# ------------------- JEI YRA INVENTORIAUS IR KAZKAS IS JO ISNUOMOTA ---------------------------------------- #}
+            {% if (kiekis != 0) and (kiekis1 != 0) and (kiekis != kiekis1) %}
+                <table class="table table-striped">
+                    <thead>
+                    <th>TIPAS</th>
+                    <th>KOKYBĖ</th>
+                    <th>ĮSIGIJIMO DATA</th>
+                    </thead>
+                {% for ir in iranga %}
+                    {% set break = false %}
+                        {% for isn in isnuomota if not break %}
+                            {% if isn.id==ir.id %}
+                                {% set break = true %}   
+                            {% endif %}
+                        {% endfor %} 
+
+                 {% if not break %}
+                        <thead>
+                            <td> {{ ir.tipas }}</td>
+                            <td> {{ ir.kokybe }}</td>
+                            <td> {{ ir.isigijimoData|date('Y-m-d') }}</td>
+                        {% if narys.getBankoKortNumeris != null %}
+                            <td> <a href={{ path('equipment_date', {'irangosid': ir.id, 'id':ir.tipas, 'kaina': kaina}) }}>NUOMOTIS</a></td>
+                        {% endif %}
+                            </thead>
+                    {% endif %}
+                {% endfor %}
+                </table>
+{# ------------------- JEI VISKAS IŠNUOMOTA ATITINKAMO VARTOTOJO ---------------------------------------- #}
+            {% elseif kiekis == kiekis1 %}
+                <h3 style="border:1px solid #750b20; padding: 10px"> Atsiprašome, tačiau šiuo metu inventoriaus neturime.</h3>
+{# ------------------- JEI YRA INVENTORIAUS IR DAR NIEKAS NEISNUOMOTA ---------------------------------------- #}
+            {% elseif kiekis != 0 %}
+                <table class="table table-striped">
+                    <thead>
+                    <th>TIPAS</th>
+                    <th>KOKYBĖ</th>
+                    <th>ĮSIGIJIMO DATA</th>
+                    </thead>
+
+                    {% for ir in iranga %}
+                        <thead>
+                        <td> {{ ir.tipas }}</td>
+                        <td> {{ ir.kokybe }}</td>
+                        <td> {{ ir.isigijimoData|date('Y-m-d') }}</td>
+                        {% if narys.getBankoKortNumeris != null %}
+                            <td> <a href={{ path('equipment_date', {'irangosid': ir.id, 'id':ir.tipas, 'kaina': kaina}) }}>NUOMOTIS</a></td>
+                        {% endif %}
+                        </thead>
+                    {% endfor %}
+                    </table>
+{# ------------------- JEI NERA INVENTORIAUS ---------------------------------------- #}
+            {% else %}
+                <h3 style="border:1px solid #750b20; padding: 10px"> Atsiprašome, tačiau šiuo metu inventoriaus neturime.</h3>
+            {% endif %}
+        </div>
+    </center>
+    <center><input type="button" value="Grįžti atgal"  class="btn btn-danger" onclick="history.back()"></center>
+
+{% endblock %}
+{% endblock %}

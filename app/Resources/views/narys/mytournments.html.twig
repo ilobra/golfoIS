@@ -5,7 +5,8 @@
 {% block body %}
  
 {% block content %}
-    <a  href={{ path('profileUser', {'id': asmuo.id}) }} > <- Grįžti atgal</a>
+    {# <a  href={{ path('profileUser', {'id': asmuo.id}) }} > <- Grįžti atgal</a> #}
+    {# <input type="button" value="<- Grįžti atgal"  class="btn btn-danger" onclick="history.back()"> #}
     <center>
         <div style="width:50%">
             <h3 class="divTitle">TURNYRAI, KURIUOSE DALYVAUSITE</h3><br>
@@ -37,4 +38,5 @@
     </div>
 </center>
 {% endblock %}
+ <center><input type="button" value="Grįžti atgal"  class="btn btn-danger" onclick="history.back()"></center>
 {% endblock %}

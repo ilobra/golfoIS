@@ -19,6 +19,8 @@ use AppBundle\Entity\Iranga;
 use AppBundle\Entity\IrangosApmokejimas;
 use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\ORM\EntityRepository;
 
 class RezervacijosController extends Controller
 {
@@ -242,7 +244,7 @@ class RezervacijosController extends Controller
         $userAsMember = $em ->getRepository('AppBundle:Narys')
                          ->find($userid); 
 
-       $rezervacija = $em ->getRepository('AppBundle:ZaidimoRezervacija')
+       	$rezervacija = $em ->getRepository('AppBundle:ZaidimoRezervacija')
                          ->find($rezervacijosid);
 
         $text1 = (string)$userid;
@@ -261,6 +263,241 @@ class RezervacijosController extends Controller
         $em->flush();
         return $this->redirectToRoute('tournmentsUser', array('id' => $user->getId()));
           
+     }
+
+     /**
+     * @Route("/equipment", name="equipment")
+     */
+     public function equipmentShow(){
+     	
+     	$userid = $this->getUser()->getId();
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	// ----- surandamas Asmuo pagal ID -----
+    	$user = $em ->getRepository('AppBundle:Asmuo')
+                         ->find($userid); 
+
+        $userAsMember = $em ->getRepository('AppBundle:Narys')
+                         ->find($userid); 
+
+        $equipmentType = $em -> getRepository('AppBundle:IrangosTipas')
+        					 ->findAll();
+
+     	return $this->render('rezervacija/equipmentType.html.twig', array(
+            	'asmuo' => $user,
+            	'irangosTipai' => $equipmentType,
+        	)); 
+
+
+     }
+
+     /**
+     * @Route("/equipment/{id}", name="equipmentType")
+     */
+     public function equipmentType(int $id){
+     	
+     	$userid = $this->getUser()->getId();
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	// ----- surandamas Asmuo pagal ID -----
+    	$user = $em ->getRepository('AppBundle:Asmuo')
+                         ->find($userid); 
+
+        $userAsMember = $em ->getRepository('AppBundle:Narys')
+                         ->find($userid); 
+
+        $equipmentType = $em -> getRepository('AppBundle:IrangosTipas')
+        					 ->find($id);
+
+        $sql = $em->createQuery('
+            		SELECT i.kokybe, i.isigijimoData, i.id, it.name as tipas
+            		FROM AppBundle:Iranga i, AppBundle:IrangosTipas it
+            		WHERE i.tipas = :id AND i.tipas=it.idIrangosTipas')->setParameter('id', $id);
+
+
+		$results = $sql->getResult();
+
+		$sql1 = $em->createQuery('
+                    SELECT COUNT(i.id) as kiekis
+            		FROM AppBundle:Iranga i, AppBundle:IrangosTipas it
+            		WHERE i.tipas = :id AND i.tipas=it.idIrangosTipas')->setParameter('id', $id);
+
+		$countArray = $sql1->getResult();
+        $count = $countArray[0]['kiekis'];
+
+        $sql3 = $em->createQuery('
+            		SELECT ia.isnuomojimoPradzia, ia.isnuomojimoPabaiga, i.isigijimoData, i.id, it.name as tipas
+            		FROM AppBundle:Iranga i, AppBundle:IrangosTipas it, AppBundle:IrangosApmokejimas ia
+            		WHERE ia.isnuomojimoPabaiga>=CURRENT_DATE() AND i.tipas = :id AND i.tipas=it.idIrangosTipas AND i.id=ia.fkIrangaid')->setParameter('id', $id);
+
+        $results3 = $sql3->getResult();
+
+        $sql4 = $em->createQuery('
+            		SELECT COUNT(ia.id) AS kiekis
+            		FROM AppBundle:Iranga i, AppBundle:IrangosTipas it, AppBundle:IrangosApmokejimas ia
+            		WHERE ia.isnuomojimoPabaiga>=CURRENT_DATE() AND i.tipas = :id AND i.tipas=it.idIrangosTipas AND i.id=ia.fkIrangaid')->setParameter('id', $id);
+
+        $countArray = $sql4->getResult();
+        $count3 = $countArray[0]['kiekis'];
+
+		$kaina = 0;
+		$antraste = ' ';
+
+		//die($count3);
+
+		if ($id==1) {
+			$kaina = 2.00;
+			$antraste = 'Nuomos kaina nurodyta vienai dienai. Nuomojama viena lazda';		
+		}
+		if ($id==2) {
+			$kaina = 3.50;
+			$antraste = 'Nuomos kaina nurodyta vienai dienai. Gaunamas 40 kamuoliukų žetonas.';
+		}
+		if ($id==3) {
+			$kaina = 35;
+			$antraste = 'Nuomos kaina nurodyta vienai dienai. Nuomojamas vienas golfo automobilis.';
+		}
+
+
+        $countArray = $sql1->getResult();
+        $count = $countArray[0]['kiekis'];
+
+     	return $this->render('rezervacija/equipment.html.twig', array(
+            	'asmuo' => $user,
+            	'iranga' => $results,
+            	'kiekis' => $count,
+            	'kaina' => $kaina,
+            	'antraste' => $antraste,
+            	'kiekis' => $count,
+            	'kiekis1' => $count3,
+            	'isnuomota' => $results3,
+            	'narys' => $userAsMember,
+        	));  
+
+
+     }
+
+     /**
+     * @Route("/equipment/{id}/{irangosid}/{kaina}", name="equipment_date")
+     */
+     public function equipmentDate(int $irangosid, string $kaina){
+     	
+     	$userid = $this->getUser()->getId();
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	// ----- surandamas Asmuo pagal ID -----
+    	$user = $em ->getRepository('AppBundle:Asmuo')
+                         ->find($userid); 
+
+        $userAsMember = $em ->getRepository('AppBundle:Narys')
+                         ->find($userid); 
+
+        $sql = $em->createQuery('
+            		SELECT i.kokybe, i.isigijimoData, i.id, it.name as tipas
+            		FROM AppBundle:Iranga i, AppBundle:IrangosTipas it
+            		WHERE i.id = :id AND i.tipas=it.idIrangosTipas')->setParameter('id', $irangosid);
+
+		$equipment = $sql->getResult(); 
+
+     	return $this->render('rezervacija/equipmentDate.html.twig', array(
+            	'asmuo' => $user,
+            	'iranga' => $equipment,
+            	'kaina' => $kaina,
+        	)); 
+
+
+     }
+
+     /**
+     * @Route("/equipment/{id}/{irangosid}/{kaina}/confirm", name="equipment_confirm")
+     */
+     public function equipmentConfirm(Request $request, int $irangosid, string $kaina){
+     	
+     	$userid = $this->getUser()->getId();
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	// ----- surandamas Asmuo pagal ID -----
+    	$user = $em ->getRepository('AppBundle:Asmuo')
+                         ->find($userid); 
+
+        $userAsMember = $em ->getRepository('AppBundle:Narys')
+                         ->find($userid); 
+
+        $sql = $em->createQuery('
+            		SELECT i.kokybe, i.isigijimoData, i.id, it.name as tipas
+            		FROM AppBundle:Iranga i, AppBundle:IrangosTipas it
+            		WHERE i.id = :id AND i.tipas=it.idIrangosTipas')->setParameter('id', $irangosid);
+
+		$equipment = $sql->getResult(); 
+
+		$days = $request->request->get('days');
+
+		$date = date("Y-m-d");
+		$dateToday = date("Y-m-d");
+
+        // Paskaičiuojamas terminas
+        if ($days==1) $date = date('Y-m-d', strtotime('+1 days'));
+        if ($days==2) $date = date('Y-m-d', strtotime('+2 days'));
+        if ($days==3) $date = date('Y-m-d', strtotime('+3 days'));
+        if ($days==7) $date = date('Y-m-d', strtotime('+7 days'));
+        if ($days==14) $date = date('Y-m-d', strtotime('+14 days'));
+
+        $price = $days * $kaina;
+
+
+
+
+     	return $this->render('rezervacija/equipmentConfirm.html.twig', array(
+            	'asmuo' => $user,
+            	'iranga' => $equipment,
+            	'data' => $date,
+            	'siandData' => $dateToday,
+            	'finalKaina' => $price,
+        	)); 
+
+
+     }
+
+      /**
+     * @Route("/equipment/{irangosid}/{kaina}/confirm/{isnPabaiga}", name="equipment_done")
+     */
+     public function equipmentDone(int $irangosid, string $kaina, string $isnPabaiga){
+     	// die("***");
+     	$userid = $this->getUser()->getId();
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	
+    	// ----- surandamas Asmuo pagal ID -----
+    	$user = $em ->getRepository('AppBundle:Asmuo')
+                         ->find($userid); 
+
+        $userAsMember = $em ->getRepository('AppBundle:Narys')
+                         ->find($userid); 
+
+
+        $equipment = $em ->getRepository('AppBundle:Iranga')
+                         ->find($irangosid);
+
+        $isnPradzia = date("Y-m-d");
+
+        $isnPradzia1 = \DateTime::createFromFormat('Y-m-d', $isnPradzia);
+        $isnPabaiga1 = \DateTime::createFromFormat('Y-m-d', $isnPabaiga);
+
+        //die($isnPradzia1);
+
+        $kaina1 = (float)$kaina;
+
+        $eqpDone = new IrangosApmokejimas();
+        $eqpDone->setSuma($kaina1);
+        $eqpDone->setIsnuomojimoPradzia($isnPradzia1);
+        $eqpDone->setIsnuomojimoPabaiga($isnPabaiga1);
+        $eqpDone->setFkNarysid($userAsMember);
+        $eqpDone->setFkIrangaid($equipment);
+
+        $em->persist($eqpDone);
+        $em->flush();
+
+        return $this->redirectToRoute('equipmentUser', array('id' => $user->getId()));
      }
 }
 

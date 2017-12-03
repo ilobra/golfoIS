@@ -9,7 +9,7 @@
         <div style="width:50%">
 
             <h3 class="divTitle">ŠIOS DIENOS REZERVACIJOS</h3>
-            <p> Rezervuoti aikštyną galima maksimaliai 3 valandoms: 8-11 arba 12-15. </p><br>
+            <i><p> Rezervuoti aikštyną galima maksimaliai 3 valandoms: 8-11 arba 12-15. </p></i><br>
         
             {% if kiekis != 0 %}
             <table class="table table-striped">
@@ -28,7 +28,7 @@
             {% endfor %}
         </table>
         {% else %}
-                <h3> Šiandien aikštynų niekas nerezervavo.</h3>
+                <h3 style="border:1px solid #750b20; padding: 10px"> Šiandien aikštynų niekas nerezervavo.</h3>
         {% endif %}
     </div>
 </center>
@@ -52,6 +52,7 @@
             </center> #}
 
         </div>
+
 {% endblock %}
 
  {# $username = $request->request->get('_username'); #}

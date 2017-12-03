@@ -1,6 +1,6 @@
 {% extends "::usermenu.html.twig" %}
 
-{% block title %}Rezervacijos{% endblock %}
+{% block title %}Įranga{% endblock %}
 
 {% block body %}
 
@@ -15,22 +15,21 @@
             {% if kiekis != 0 %}
             <table class="table table-striped">
             <thead>
-            <th>DATA</th>
-            <th>LAIKAS</th>
-            <th>AIKŠTYNO INFORMACIJA</th>
+            <th>TIPAS</th>
+            <th>KOKYBĖ</th>
+            <th>NUOMOS TERMINAS</th>
+            <th>KAINA</th>
             </thead>
-                {% for rezervacija in rezervacijos %}
+                {% for ir in iranga %}
                 <thead>
-                <td> {{ rezervacija.data|date('Y-m-d')}}</td>
-                <td> {{ rezervacija.pradziosLaikas|date('H:i:s') }} - {{ rezervacija.pabaigosLaikas|date('H:i:s') }}</td>
-                <td> {{ rezervacija.aikstynoInfo }}</td>
-                <td>
-                    <a  href={{ path('reservation_delete', {'id': rezervacija.id}) }} onclick="return confirm('Ar tikrai norite panaikinti rezervaciją?')">NAIKINTI</a>
-                </td>
+                <td> {{ ir.tipas }} </td>
+                <td> {{ ir.kokybe }} </td>
+                <td> <b>nuo:</b> {{ ir.isnuomojimoPradzia|date('Y-m-d') }}<br> <b>iki:</b> {{ ir.isnuomojimoPabaiga|date('Y-m-d') }}</td>
+                <td> {{ ir.suma }} €</td>
                 </thead>
                 {% endfor %}
             {% else %}
-                <h3> Kol kas rezervacijų dar neatlikote. Norite rezervuoti laiką? <a href="{{ path('reservation') }}">Keliaukite -></a> </h3>
+                <h3> Kol kas dar nieko neišsinuomojote.. Norite išsinuomoti inventorių? <a href="{{ path('equipment') }}">Keliaukite -></a> </h3>
             {% endif %}
         </table>
     </div>

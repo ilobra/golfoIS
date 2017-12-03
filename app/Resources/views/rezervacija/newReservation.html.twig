@@ -5,7 +5,7 @@
 {% block body %}
 
 {% block content %}
-    <a  href={{ path('reservation')}} > <- Grįžti atgal</a>
+    {# <a  href={{ path('reservation')}} > <- Grįžti atgal</a> #}
     <center>
         <div style="width:50%">
 
@@ -39,8 +39,13 @@
             </thead>
 
             {% for aikstynas in aikstynai %}
+                {% set break = false %}
                 {% for rezultatas in rezultatai %}
-            {% if aikstynas.aikstynoInfo != rezultatas.aikstynoInfo %}
+                    {% if aikstynas.aikstynoInfo == rezultatas.aikstynoInfo %}
+                        {% set break = true %}
+                    {% endif %}
+                {% endfor %}
+            {% if not break %}
             <thead>
             <td> {{ data|date('Y-m-d') }}</td>
             <td> {{ laikasRyt|date('H:i:s') }} - {{ laikasRyt1|date('H:i:s') }}</td>
@@ -48,9 +53,7 @@
             <td> <a  onclick="return confirm('Ar tikrai norite rezervuoti šį laiką?')" href={{ path('reservation_add', {'aikstynoid': aikstynas.id, 'data': data, 'laikasPr': laikasRyt, 'laikasPab': laikasRyt1}) }}>REZERVUOTI</a></td>
             </thead>
             {% endif %}
-                {% endfor %}
             {% endfor %}
-
         {% endif %}
         </table> 
 
@@ -81,23 +84,27 @@
             </thead>
 
             {% for aikstynas in aikstynai %}
-                {% for rezultatas in rezultatai1 %}
-            {% if aikstynas.aikstynoInfo != rezultatas.aikstynoInfo %}
+                {% set break = false %}
+                {% for rezultatas in rezultatai %}
+                    {% if aikstynas.aikstynoInfo == rezultatas.aikstynoInfo %}
+                        {% set break = true %}
+                    {% endif %}
+                {% endfor %}
+            {% if not break %}
             <thead>
             <td> {{ data|date('Y-m-d') }}</td>
-            <td> {{ laikasDien|date('H:i:s') }} - {{ laikasDien1|date('H:i:s') }}</td>
+            <td> {{ laikasRyt|date('H:i:s') }} - {{ laikasRyt1|date('H:i:s') }}</td>
             <td> {{ aikstynas.aikstynoInfo }}</td>
             <td> <a  onclick="return confirm('Ar tikrai norite rezervuoti šį laiką?')" href={{ path('reservation_add', {'aikstynoid': aikstynas.id, 'data': data, 'laikasPr': laikasDien, 'laikasPab': laikasDien1}) }}>REZERVUOTI</a></td>
             </thead>
             {% endif %}
-                {% endfor %}
             {% endfor %}
-
         {% endif %}
         </table> 
     </div>
 </center>
 <br>
  </div>
+ <center><input type="button" value="Grįžti atgal"  class="btn btn-danger" onclick="history.back()"></center>
 {% endblock %}
 {% endblock %}

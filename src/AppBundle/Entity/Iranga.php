@@ -45,6 +45,89 @@ class Iranga
      */
     private $tipas;
 
+    
+    /**
+     * Set kokybe
+     *
+     * @param string $kokybe
+     *
+     * @return Iranga
+     */
+    public function setKokybe($kokybe)
+    {
+        $this->kokybe = $kokybe;
+
+        return $this;
+    }
+
+    /**
+     * Get kokybe
+     *
+     * @return string
+     */
+    public function getKokybe()
+    {
+        return $this->kokybe;
+    }
+
+    /**
+     * Set isigijimoData
+     *
+     * @param \DateTime $isigijimoData
+     *
+     * @return Iranga
+     */
+    public function setIsigijimoData($isigijimoData)
+    {
+        $this->isigijimoData = $isigijimoData;
+
+        return $this;
+    }
+
+    /**
+     * Get isigijimoData
+     *
+     * @return \DateTime
+     */
+    public function getIsigijimoData()
+    {
+        return $this->isigijimoData;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set tipas
+     *
+     * @param \AppBundle\Entity\IrangosTipas $tipas
+     *
+     * @return Iranga
+     */
+    public function setTipas(\AppBundle\Entity\IrangosTipas $tipas = null)
+    {
+        $this->tipas = $tipas;
+
+        return $this;
+    }
+
+    /**
+     * Get tipas
+     *
+     * @return \AppBundle\Entity\IrangosTipas
+     */
+    public function getTipas()
+    {
+        return $this->tipas;
+    }
+
 
 }
 

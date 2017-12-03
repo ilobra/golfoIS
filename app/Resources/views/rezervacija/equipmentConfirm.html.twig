@@ -1,0 +1,50 @@
+{% extends "::usermenu.html.twig" %}
+
+{% block title %}Įranga{% endblock %}
+
+{% block body %}
+{% block content %}
+
+    <center>
+        <div style="width:50%">
+
+            <h3 class="divTitle">JŪSŲ PASIRINKTA ĮRANGA</h3><br><br>
+
+                {% for ir in iranga %}
+                    
+                        <table class="table table-striped">
+                            <thead>
+                            <th>TIPAS</th>
+                            <th>KOKYBĖ</th>
+                            <th>NUOMOS TERMINAS</th>
+                            <th>KAINA</th>
+                            </thead>
+
+                            <form method="post" action="{{ path('equipment_done', {'irangosid': ir.id, 'kaina':finalKaina, 'isnPabaiga':data}) }}">
+                            <thead>
+                            <td> {{ ir.tipas }}</td>
+                            <td> {{ ir.kokybe }}</td>
+                            <td> <b>nuo:</b> {{ siandData|date('Y-m-d') }}<br> <b>iki:</b> {{ data|date('Y-m-d') }}  </td>
+                            <td> {{ finalKaina }} €</td>
+                            </thead>
+                        </table>
+                        
+                {% endfor %}
+                <input onclick="return confirm('Ar tikrai norite nuomotis inventorių?')" type="submit" class="btn btn-info" value="Patvirtinti" /><br>
+            </form>
+            
+        </div>
+    </center>
+    <center>
+   <br> <input  type="button" value="Grįžti atgal"  class="btn btn-danger" onclick="history.back()"></center>
+
+{% endblock %}
+<style>
+select {
+    height: 30px;
+    color: #2F4F4F;
+    border-radius: 3px; /* suapvalinimas */
+    border: 1px solid black;
+}
+</style>
+{% endblock %}

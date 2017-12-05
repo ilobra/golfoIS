@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Asmuo controller.
  *
- * @Route("asmuo")
+ * @Route("admin/asmuo")
  */
 class AsmuoController extends Controller
 {
@@ -50,6 +50,11 @@ class AsmuoController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $password = $this
+                ->get('security.password_encoder')
+                ->encodePassword($asmuo,$asmuo->getPlainPassword());
+
+            $asmuo->setPassword($password);
             $em = $this->getDoctrine()->getManager();
             $em->persist($asmuo);
             $em->flush();
@@ -100,6 +105,11 @@ class AsmuoController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $password = $this
+                ->get('security.password_encoder')
+                ->encodePassword($asmuo, $asmuo->getPlainPassword());
+
+            $asmuo->setPassword($password);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('asmuo_edit', array('id' => $asmuo->getId()));

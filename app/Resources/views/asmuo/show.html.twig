@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Asmuo</h1>
+    <h1>Vartotojas</h1>
 
     <table>
         <tbody>
@@ -10,21 +10,21 @@
                 <td>{{ asmuo.vardas }}</td>
             </tr>
             <tr>
-                <th>Pavarde</th>
+                <th>Pavardė</th>
                 <td>{{ asmuo.pavarde }}</td>
             </tr>
             <tr>
-                <th>El pastas</th>
+                <th>El. paštas</th>
                 <td>{{ asmuo.elPastas }}</td>
             </tr>
             <tr>
                 <th>Asmens kodas</th>
                 <td>{{ asmuo.asmensKodas }}</td>
             </tr>
-            <tr>
-                <th>Slaptazodis</th>
-                <td>{{ asmuo.slaptazodis }}</td>
-            </tr>
+            {#<tr>#}
+                {#<th>Slaptažodis</th>#}
+                {#<td>{{ asmuo.slaptazodis }}</td>#}
+            {#</tr>#}
             <tr>
                 <th>Vartotojo tipas</th>
                 <td>{{ tipas.name }}</td>
@@ -38,14 +38,14 @@
 
     <ul>
         <li>
-            <a href="{{ path('asmuo_index') }}">Back to the list</a>
+            <a href="{{ path('asmuo_index') }}">Atgal į sąrašą</a>
         </li>
         <li>
-            <a href="{{ path('asmuo_edit', { 'id': asmuo.id }) }}">Edit</a>
+            <a href="{{ path('asmuo_edit', { 'id': asmuo.id }) }}">Redaguoti</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Šalinti">
             {{ form_end(delete_form) }}
         </li>
     </ul>

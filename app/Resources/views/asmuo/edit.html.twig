@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Asmuo edit</h1>
+    <h1>Redaguoti vartotoją</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
@@ -10,11 +10,11 @@
 
     <ul>
         <li>
-            <a href="{{ path('asmuo_index') }}">Back to the list</a>
+            <a href="{{ path('asmuo_index') }}">Atgal į sąrašą</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Šalinti">
             {{ form_end(delete_form) }}
         </li>
     </ul>

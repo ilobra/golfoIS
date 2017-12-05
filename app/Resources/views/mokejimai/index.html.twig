@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Atliktų mokėjimų sąrašas</h1>
+
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Suma</th>
+            <th>Išnuomojimo pradžia</th>
+            <th>Išnuomojimo pabaiga</th>
+            <th>Vardas</th>
+            <th>Pavardė</th>
+            <th>El. paštas</th>
+            <th>Asmens kodas</th>
+            <th>Nario ID</th>
+            <th>Banko kortelės nr.</th>
+            <th>Nuomojama įranga</th>
+            <th>Įrangos kokybė</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for mokejimas in mokejimai %}
+            <tr>
+                <td>{{ mokejimas.id }}</td>
+                <td>{{ mokejimas.suma }}€</td>
+                <td>{{ mokejimas.isnuomojimoPradzia|date('Y-m-d')}}</td>
+                <td>{{ mokejimas.isnuomojimoPabaiga|date('Y-m-d') }}</td>
+                <td>{{ mokejimas.vardas }}</td>
+                <td>{{ mokejimas.pavarde }}</td>
+                <td>{{ mokejimas.elPastas }}</td>
+                <td>{{ mokejimas.asmensKodas }}</td>
+                <td>{{ mokejimas.narioId }}</td>
+                <td>{{ mokejimas.bankoKortNumeris }}</td>
+                <td>{{ mokejimas.iranga }}</td>
+                <td>{{ mokejimas.kokybe }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

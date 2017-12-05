@@ -1,39 +1,37 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Asmuos list</h1>
+    <h1>Vartotojų sąrašas</h1>
 
     <table>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Vardas</th>
-                <th>Pavarde</th>
-                <th>Elpastas</th>
-                <th>Asmenskodas</th>
-                {#<th>Slaptazodis</th>#}
+                <th>Pavardė</th>
+                <th>El. paštas</th>
+                <th>Asmens kodas</th>
                 <th>Asmens tipas</th>
-                <th>Id</th>
-                <th>Actions</th>
+                <th>Veiksmai</th>
             </tr>
         </thead>
         <tbody>
         {% for asmuo in asmuos %}
             <tr>
+                <td>{{ asmuo.id }}</td>
                 <td><a href="{{ path('asmuo_show', { 'id': asmuo.id }) }}">{{ asmuo.vardas }}</a></td>
                 <td>{{ asmuo.pavarde }}</td>
                 <td>{{ asmuo.elPastas }}</td>
                 <td>{{ asmuo.asmensKodas }}</td>
                 {#<td>{{ asmuo.slaptazodis }}</td>#}
                 <td>{{ asmuo.tipas }}</td>
-
-                <td>{{ asmuo.id }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('asmuo_show', { 'id': asmuo.id }) }}">show</a>
+                            <a href="{{ path('asmuo_show', { 'id': asmuo.id }) }}">rodyti</a>
                         </li>
                         <li>
-                            <a href="{{ path('asmuo_edit', { 'id': asmuo.id }) }}">edit</a>
+                            <a href="{{ path('asmuo_edit', { 'id': asmuo.id }) }}">redaguoti</a>
                         </li>
                     </ul>
                 </td>
@@ -44,7 +42,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('asmuo_new') }}">Create a new asmuo</a>
+            <a href="{{ path('asmuo_new') }}">Registruoti naują vartotoją</a>
         </li>
     </ul>
 {% endblock %}

@@ -62,6 +62,9 @@ class AsmensTipas
         return $this->idAsmensTipas;
     }
 
-
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
 

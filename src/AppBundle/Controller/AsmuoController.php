@@ -24,10 +24,16 @@ class AsmuoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $asmuos = $em->getRepository('AppBundle:Asmuo')->findAll();
+        $sql = $em->createQuery('
+            		SELECT a.id, a.vardas, a.pavarde, a.elPastas, a.asmensKodas, ast.name AS tipas
+            		FROM AppBundle:Asmuo a, AppBundle:AsmensTipas ast
+            		WHERE a.tipas = ast.idAsmensTipas');
+
+        $results = $sql->getResult();
 
         return $this->render('asmuo/index.html.twig', array(
-            'asmuos' => $asmuos,
+            'asmuos' => $results,
+            //'tipas'=>$type,
         ));
     }
 
@@ -66,9 +72,17 @@ class AsmuoController extends Controller
     public function showAction(Asmuo $asmuo)
     {
         $deleteForm = $this->createDeleteForm($asmuo);
-
+        $userid = $this->getUser()->getId();
+        $em = $this->getDoctrine()->getManager();
+        // ----- surandamas Asmuo pagal ID -----
+//        $user = $em ->getRepository('AppBundle:Asmuo')
+//            ->find($userid);
+        $type = $asmuo->getTipas();
+        $types = $em ->getRepository('AppBundle:AsmensTipas')
+            ->find($type); //default: member
         return $this->render('asmuo/show.html.twig', array(
             'asmuo' => $asmuo,
+            'tipas'=>$type,
             'delete_form' => $deleteForm->createView(),
         ));
     }

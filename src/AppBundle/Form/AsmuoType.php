@@ -22,7 +22,8 @@ class AsmuoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Asmuo'
+            'data_class' => 'AppBundle\Entity\Asmuo',
+            'data_class2'=>'AppBundle\Entity\AsmensTipas'
         ));
     }
 

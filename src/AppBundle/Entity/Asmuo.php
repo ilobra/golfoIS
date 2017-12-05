@@ -168,6 +168,22 @@ class Asmuo implements UserInterface
     {
         $this->slaptazodis = $slaptazodis;
     }
+    /**
+     * @return string
+     */
+    public function getSlaptazodis()
+    {
+        return $this->slaptazodis;
+    }
+
+
+    /**
+     * @param string $slaptazodis
+     */
+    public function setSlaptazodis($slaptazodis)
+    {
+        $this->slaptazodis = $slaptazodis;
+    }
 
     /**
      * @return string

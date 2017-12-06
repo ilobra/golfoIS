@@ -93,7 +93,7 @@
             {% if not break %}
             <thead>
             <td> {{ data|date('Y-m-d') }}</td>
-            <td> {{ laikasRyt|date('H:i:s') }} - {{ laikasRyt1|date('H:i:s') }}</td>
+            <td> {{ laikasDien|date('H:i:s') }} - {{ laikasDien1|date('H:i:s') }}</td>
             <td> {{ aikstynas.aikstynoInfo }}</td>
             <td> <a  onclick="return confirm('Ar tikrai norite rezervuoti šį laiką?')" href={{ path('reservation_add', {'aikstynoid': aikstynas.id, 'data': data, 'laikasPr': laikasDien, 'laikasPab': laikasDien1}) }}>REZERVUOTI</a></td>
             </thead>

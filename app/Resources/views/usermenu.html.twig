@@ -23,6 +23,7 @@
                           <a href="{{ path('reservation') }}" role="button" class="btn btn-info" style="width: 150px">Rezervacijos</a>
                          <a href="{{ path('tournments') }}" role="button" class="btn btn-info" style="width: 150px">Turnyrai</a>
                            <a href="{{ path('equipment') }}" role="button" class="btn btn-info" style="width: 150px">Įranga</a>
+                        <a href="{{ path('ranking') }}" role="button" class="btn btn-info" style="width: 150px">Reitingas</a>
                        <a href="/logout" role="button" class="btn btn-danger" style="width: 150px; ">Atsijungti</a>
                     </form></li>
             </ul>
@@ -38,7 +39,7 @@
  <title>{% block title %}Golfo klubo IS{% endblock %}</title>
 <body>
         {% block body %}{% endblock %}
-        {% block javascripts %} 
+        {% block javascripts %}
             <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
     <script>
@@ -60,6 +61,7 @@
             nextText: ">",
             prevText: "<"
         });
-}); </script>
+});
+    </script>
         {% endblock %}
     </body>

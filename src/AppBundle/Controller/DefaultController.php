@@ -20,16 +20,18 @@ class DefaultController extends Controller
             // ----- surandamas Asmuo pagal ID -----
             $user = $em ->getRepository('AppBundle:Asmuo')
                          ->find($userid); 
-            $type = $user->getTipas();
-        
-            // ----- nustatomas asmens tipas -----
-            $types = $em ->getRepository('AppBundle:AsmensTipas')
-                      ->find($type); //default: member
-            $userType = $types->getIdAsmensTipas();
 
+            $userRole=$user->getRoles();
             // šitoj vietoj susidėtų visi vartotojų tipai
-            if ($userType==5) return $this->redirectToRoute('homepageUser', [ 'id' => $userid ]);
-         }
+            //6 tipui (ROLE_VIP rolei) sukurti homepageVIP twig'ą, 3,2,1 tipams (ROLE_PERSONAL rolei) - homepagePersonal
+            if ($userRole[0]=="ROLE_ADMIN"){ return $this->redirectToRoute('homepageAdmin', [ 'id' => $userid ]);}
+            else if ($userRole[0]=="ROLE_VIP") {return $this->redirectToRoute('homepageUser', [ 'id' => $userid ]);}
+            else if ($userRole[0]=="ROLE_USER") {return $this->redirectToRoute('homepageUser', [ 'id' => $userid ]);}
+
+            else if($userRole[0]=="ROLE_PERSONAL") {return $this->redirectToRoute('homepageUser', ['id'=>$userid]);}
+           }
+
+
 
         // jei dar ne
         return $this->render('default/index.html.twig', [

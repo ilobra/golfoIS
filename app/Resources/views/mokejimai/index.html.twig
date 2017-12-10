@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '::adminmenu.html.twig' %}
 
 {% block body %}
     <h1>Atliktų mokėjimų sąrašas</h1>
@@ -22,9 +22,12 @@
 
         </tr>
         </thead>
+
         <tbody>
+
         {% for mokejimas in mokejimai %}
-            <tr>
+            {#{% if mokejimas.isnuomojimoPradzia|date('Y-m-d') >= datepicker and mokejimas.isnuomojimoPradzia|date('Y-m-d') <=datepicker2%}#}
+                <tr>
                 <td>{{ mokejimas.id }}</td>
                 <td>{{ mokejimas.suma }}€</td>
                 <td>{{ mokejimas.isnuomojimoPradzia|date('Y-m-d')}}</td>
@@ -37,9 +40,69 @@
                 <td>{{ mokejimas.bankoKortNumeris }}</td>
                 <td>{{ mokejimas.iranga }}</td>
                 <td>{{ mokejimas.kokybe }}</td>
-            </tr>
+                </tr>
+            {#{{ dump(mokejimas.isnuomojimoPradzia|date('Y-m-d')) }}#}
+            {#{% endif %}#}
         {% endfor %}
+
         </tbody>
     </table>
+    <form method="get" action="">
+
+        <label for="datepicker">Pasirinkite datos intervalą:</label>
+        <input type="text" class="form-control" id="datepicker" name="datepicker" style="width:200px" required=true><br>
+        <input type="text" class="form-control" id="datepicker2" name="datepicker2" style="width:200px" required=true><br>
+
+        <input type="submit" class="btn btn-info" value="Ieškoti apmokėjimų" />
+
+
+    </form>
+
+
+    <style>
+        table.ui-datepicker-calendar{
+            border: 2px solid black;
+            background-color: #eff5f5;
+            padding: 10px;
+            border-spacing: 10px;
+            border-collapse: separate;
+            width: 100%;
+        }
+
+        .ui-datepicker-title {
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 2px;
+            border-top: 2px solid black;
+            border-right: 2px solid black;
+            border-left: 2px solid black;
+            border-bottom: 2px solid black;
+            background-color: #bfd9d9;
+            height: 35px;
+        }
+
+        .ui-datepicker-header{
+            background:-color: white;
+        }
+
+        .ui-datepicker-prev {
+            margin:auto;
+            float: left;
+            cursor: pointer;
+            background-position: center -30px;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .ui-datepicker-next {
+            float: right;
+            cursor: pointer;
+            background-position: center 0px;
+            font-weight: bold;
+            padding: 10px;
+        }
+    </style>
+
 
 {% endblock %}

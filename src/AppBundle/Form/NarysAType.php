@@ -42,9 +42,11 @@ class NarysAType extends AbstractType
             ])
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                // 'required' => false,
-                'first_options'  => [ 'label' => 'Naujas slaptažodis:* ', 'attr' => array('class'=>'form-control', 'style'=>'width:40%; background-color:#f8b9c6') ],
-                'second_options' => [ 'label' => 'Pakartoti slaptažodį:* ', 'attr' => array('class'=>'form-control', 'style'=>'width:40%; background-color:#f8b9c6') ]
+
+                'required'=>false,
+                'first_options'  => [ 'label' => 'Naujas slaptažodis:* ','attr' => array('class'=>'form-control', 'style'=>'width:40%') ],
+                'second_options' => [ 'label' => 'Pakartoti slaptažodį:* ','attr' => array('class'=>'form-control', 'style'=>'width:40%') ]
+
             ))
         ;
     }

@@ -95,6 +95,7 @@ class Asmuo implements UserInterface
      */
     private $tipas;
 
+    private $role;
 
     /**
      * @return int
@@ -249,9 +250,34 @@ class Asmuo implements UserInterface
 
     public function getRoles()
     {
-        return [ 'ROLE_USER' ];
+        if($this->getTipas()->getIdAsmensTipas()==5) {
+            $role="ROLE_USER";
+            return ['ROLE_USER'];
+        }
+        else if($this->getTipas()->getIdAsmensTipas()==4){
+            $role="ROLE_ADMIN";
+            return ['ROLE_ADMIN'];
+        }
+        else if($this->getTipas()->getIdAsmensTipas()==6){
+            $role="ROLE_VIP";
+            return ['ROLE_VIP'];
+        }
+        else if($this->getTipas()->getIdAsmensTipas()==3||$this->getTipas()->getIdAsmensTipas()==2||$this->getTipas()->getIdAsmensTipas()==1) {//return [ 'ROLE_VIP','ROLE_USER','ROLE_ADMIN','ROLE_PERSONAL' ];
+            $role="ROLE_PERSONAL";
+            return ['ROLE_PERSONAL'];
+        }
+    }
+    public function setRole($role){
+        $this->role=$role;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
     public function getSalt()
     {
         // TODO: Implement getSalt() method.

@@ -37,7 +37,7 @@ class RegistrationController extends Controller
             $tipas = $em ->getRepository('AppBundle:AsmensTipas')
                          ->find(5); //default: member
             $user->setTipas($tipas);
-            
+            $user->setRole("ROLE_USER");
             $em->persist($user);
             $em->flush();
 

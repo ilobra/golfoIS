@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<h1>Bendras geriausių žaidėjų sąrašas</h1>
+
+
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>ID</th>
+        <th>Vardas</th>
+        <th>Pavardė</th>
+        <th>Komanda</th>
+        <th>Rezultatas</th>
+
+
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for rank in reitingas %}
+
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ rank.id }}</td>
+            <td>{{ rank.vardas }}</td>
+            <td>{{ rank.pavarde }}</td>
+            <td>{{ rank.komanda }}</td>
+            <td>{{ rank.result }}</td>
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+</table>
+{% endblock %}

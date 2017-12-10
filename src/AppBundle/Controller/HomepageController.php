@@ -23,16 +23,15 @@ class HomepageController extends Controller
         $em = $this->getDoctrine()->getManager();
         // ----- surandamas Asmuo pagal ID -----
     	$user = $em ->getRepository('AppBundle:Asmuo')
-                         ->find($userid); 
-        $type = $user->getTipas();
-        
-        // ----- nustatomas asmens tipas -----
-        $types = $em ->getRepository('AppBundle:AsmensTipas')
-                      ->find($type); //default: member
-        $userType = $types->getIdAsmensTipas();
-
+                         ->find($userid);
         // šitoj vietoj susidėtų visi vartotojų tipai
-        if ($userType==5) return $this->redirectToRoute('homepageUser', [ 'id' => $userid ]);
+        //6 tipui (ROLE_VIP rolei) sukurti homepageVIP twig'ą, 3,2,1 tipams (ROLE_PERSONAL rolei) - homepagePersonal
+        $userRole=$user->getRoles();
+        if ($userRole[0]=="ROLE_ADMIN"){ return $this->redirectToRoute('homepageAdmin', [ 'id' => $userid ]);}
+        else if ($userRole[0]=="ROLE_VIP") {return $this->redirectToRoute('homepageUser', [ 'id' => $userid ]);}
+        else if ($userRole[0]=="ROLE_USER") {return $this->redirectToRoute('homepageUser', [ 'id' => $userid ]);}
+
+        else if($userRole[0]=="ROLE_PERSONAL") {return $this->redirectToRoute('homepageUser', ['id'=>$userid]);}
         else return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
@@ -53,4 +52,19 @@ class HomepageController extends Controller
             	'asmuo' => $user,
         	));
      }
+    /**
+     * @Route("admin/home/{id}", name="homepageAdmin")
+     */
+    public function adminHomepage(Asmuo $userid)
+    {
+        $userid = $this->getUser()->getId();
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em ->getRepository('AppBundle:Asmuo')
+            ->find($userid);
+
+        return $this->render('homepage/homepageAdmin.html.twig', array(
+            'asmuo' => $user,
+        ));
+    }
 }

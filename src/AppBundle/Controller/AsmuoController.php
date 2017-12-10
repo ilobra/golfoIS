@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Asmuo controller.
  *
- * @Route("admin/asmuo")
+ * @Route("admin/asmuo", name="asmenys")
  */
 class AsmuoController extends Controller
 {
@@ -48,13 +48,29 @@ class AsmuoController extends Controller
         $asmuo = new Asmuo();
         $form = $this->createForm('AppBundle\Form\AsmuoType', $asmuo);
         $form->handleRequest($request);
-
+        $em = $this->getDoctrine()->getManager();
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $this
                 ->get('security.password_encoder')
                 ->encodePassword($asmuo,$asmuo->getPlainPassword());
 
+
+            $type = $asmuo->getTipas();
+
+            // ----- nustatomas asmens tipas -----
+            $types = $em ->getRepository('AppBundle:AsmensTipas')
+                ->find($type); //default: member
+            $userType = $types->getIdAsmensTipas();
+            if($userType==6){
+                $asmuo->setRole("ROLE_VIP");}
+            else if($userType==5){
+                $asmuo->setRole("ROLE_USER");}
+            else if($userType==4){
+                $asmuo->setRole("ROLE_ADMIN");}
+            else if($userType==3||$userType==2||$userType==1){
+                $asmuo->setRole("ROLE_PERSONAL");}
             $asmuo->setPassword($password);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($asmuo);
             $em->flush();
@@ -103,13 +119,28 @@ class AsmuoController extends Controller
         $deleteForm = $this->createDeleteForm($asmuo);
         $editForm = $this->createForm('AppBundle\Form\AsmuoType', $asmuo);
         $editForm->handleRequest($request);
-
+        $em = $this->getDoctrine()->getManager();
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $password = $this
+           if($asmuo->getPlainPassword()!=null)
+           { $password = $this
                 ->get('security.password_encoder')
                 ->encodePassword($asmuo, $asmuo->getPlainPassword());
+           $asmuo->setPassword($password);}
+            $type = $asmuo->getTipas();
 
-            $asmuo->setPassword($password);
+            // ----- nustatomas asmens tipas -----
+            $types = $em ->getRepository('AppBundle:AsmensTipas')
+                ->find($type); //default: member
+            $userType = $types->getIdAsmensTipas();
+            if($userType==6){
+                $asmuo->setRole("ROLE_VIP");}
+            if($userType==5){
+                $asmuo->setRole("ROLE_USER");}
+            if($userType==4){
+                $asmuo->setRole("ROLE_ADMIN");}
+            if($userType==3||$userType==2||$userType==1){
+                $asmuo->setRole("ROLE_PERSONAL");}
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('asmuo_edit', array('id' => $asmuo->getId()));

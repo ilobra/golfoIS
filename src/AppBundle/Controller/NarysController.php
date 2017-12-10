@@ -29,6 +29,16 @@ class NarysController extends Controller
         return $this->redirectToRoute('profileUser', [ 'id' => $userid ]);
 
     }
+    /**
+     * @Route("admin/profile", name="profileadm")
+     */
+    public function profileadmAction()
+    {
+        $userid = $this->getUser()->getId();
+
+        return $this->redirectToRoute('profileAdmin', [ 'id' => $userid ]);
+
+    }
 
     /**
      * @Route("/profile/{id}", name="profileUser")
@@ -53,6 +63,30 @@ class NarysController extends Controller
 
 
      }
+    /**
+     * @Route("admin/profile/{id}", name="profileAdmin")
+     */
+    public function profileadminShow(){
+
+        $userid = $this->getUser()->getId();
+
+        $em = $this->getDoctrine()->getManager();
+
+        // ----- surandamas Asmuo pagal ID -----
+        $user = $em ->getRepository('AppBundle:Asmuo')
+            ->find($userid);
+         $role=$user->getRoles();
+//        $userAsMember = $em ->getRepository('AppBundle:Narys')
+//            ->find($userid);
+
+
+        return $this->render('narys/profileadm.html.twig', array(
+            'asmuo' => $user,
+//            'narys' => $userAsMember,
+        ));
+
+
+    }
 
      /**
      * @Route("/profile/{id}/edit", name="profile_edit")
@@ -71,23 +105,62 @@ class NarysController extends Controller
      	$editForm = $this->createForm('AppBundle\Form\NarysAType', $user);
         $editForm->handleRequest($request);
 
-        $tipas = $em ->getRepository('AppBundle:AsmensTipas')
-                         ->find(5); //default: member
-        $user->setTipas($tipas);
-            
+//        $tipas = $em ->getRepository('AppBundle:AsmensTipas')
+//                         ->find(5); //default: member
+//        $user->setTipas($tipas);
+//
         $em->persist($user);
         $em->flush();
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-        	$password = $this
+            if($user->getPlainPassword()!=null){$password = $this
                 ->get('security.password_encoder')
                 ->encodePassword($user, $user->getPlainPassword());
 
-            $user->setPassword($password);
+            $user->setPassword($password);}
         	$this->getDoctrine()->getManager()->flush();
            return $this->redirectToRoute('profileUser', array('id' => $user->getId()));
         }
         return $this->render('narys/edit.html.twig', array(
+            'member' => $user,
+            'edit_form' => $editForm->createView(),
+
+        ));
+    }
+    /**
+     * @Route("admin/profile/{id}/edit", name="profileadm_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function profileadmEdit(Request $request){
+
+        $userid = $this->getUser()->getId();
+
+        $em = $this->getDoctrine()->getManager();
+
+        // ----- surandamas Asmuo pagal ID -----
+        $user = $em ->getRepository('AppBundle:Asmuo')
+            ->find($userid);
+
+        $editForm = $this->createForm('AppBundle\Form\NarysAType', $user);
+        $editForm->handleRequest($request);
+
+//        $tipas = $em ->getRepository('AppBundle:AsmensTipas')
+//            ->find(4); //default: member
+//        $user->setTipas($tipas);
+
+        $em->persist($user);
+        $em->flush();
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            if($user->getPlainPassword()!=null){$password = $this
+                ->get('security.password_encoder')
+                ->encodePassword($user, $user->getPlainPassword());
+
+            $user->setPassword($password);}
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('profileAdmin', array('id' => $user->getId()));
+        }
+        return $this->render('narys/editadm.html.twig', array(
             'member' => $user,
             'edit_form' => $editForm->createView(),
 

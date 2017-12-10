@@ -10,7 +10,7 @@
         <div style="width:50%">
 
             <h3 class="divTitle">ŠIOS DIENOS REZERVACIJOS</h3>
-            <p> Rezervuoti aikštyną galima maksimaliai 3 valandoms: 8-11 arba 12-15. </p><br>
+            <i><p> Rezervuoti aikštyną galima maksimaliai 3 valandoms: 8-11 arba 12-15. </p></i><br>
         
 {# -------------------------------------- RYTINIO LAIKO REZERVACIJOS -------------------------------------- #}
         {% if kiekisRyt == 0 %}
@@ -93,7 +93,7 @@
             {% if not break %}
             <thead>
             <td> {{ data|date('Y-m-d') }}</td>
-            <td> {{ laikasRyt|date('H:i:s') }} - {{ laikasRyt1|date('H:i:s') }}</td>
+            <td> {{ laikasDien|date('H:i:s') }} - {{ laikasDien1|date('H:i:s') }}</td>
             <td> {{ aikstynas.aikstynoInfo }}</td>
             <td> <a  onclick="return confirm('Ar tikrai norite rezervuoti šį laiką?')" href={{ path('reservation_add', {'aikstynoid': aikstynas.id, 'data': data, 'laikasPr': laikasDien, 'laikasPab': laikasDien1}) }}>REZERVUOTI</a></td>
             </thead>

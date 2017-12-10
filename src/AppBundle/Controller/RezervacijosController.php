@@ -190,14 +190,14 @@ class RezervacijosController extends Controller
         $sql = $em->createQuery('
             		SELECT r.data, r.pradziosLaikas, r.id, r.pavadinimas, r.pabaigosLaikas, a.aikstynoInfo
             		FROM AppBundle:ZaidimoRezervacija r, AppBundle:Aikstynas a
-            		WHERE r.data > CURRENT_DATE() AND r.fkAikstynasid = a.id AND r.pradziosLaikas=:etime')->setParameter('etime', '16:00:00');
+            		WHERE r.data >= CURRENT_DATE() AND r.fkAikstynasid = a.id AND r.pradziosLaikas=:etime')->setParameter('etime', '16:00:00');
 
 		 $results = $sql->getResult();
 
 		 $sql = $em->createQuery('
                     SELECT COUNT(r.id) AS kiekis
             		FROM AppBundle:ZaidimoRezervacija r, AppBundle:Aikstynas a
-            		WHERE r.data > CURRENT_DATE() AND r.fkAikstynasid = a.id AND r.pradziosLaikas=:etime')->setParameter('etime', '16:00:00');
+            		WHERE r.data >= CURRENT_DATE() AND r.fkAikstynasid = a.id AND r.pradziosLaikas=:etime')->setParameter('etime', '16:00:00');
 
          $countArray = $sql->getResult();
          $count = $countArray[0]['kiekis'];

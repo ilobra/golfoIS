@@ -1,25 +1,40 @@
 {% extends '::adminmenu.html.twig' %}
 
 {% block body %}
-    <h1>Atliktų mokėjimų už įrangą sąrašas</h1>
+    <center><h1>Atliktų mokėjimų už įrangą sąrašas</h1></center>
 
-    <form method="get" action="">
+   <center> <form method="get" action="">
         <p>Pasirinkite intervalą:</p>
         <label for="from">Nuo:</label>
         <input type="text" id="from" name="from">
-        <label for="to">iki:</label>
+
+        <label for="to">Iki:</label>
         <input type="text" id="to" name="to">
+       </br>
         <input type="submit" class="btn btn-info" value="Ieškoti apmokėjimų" />
 
     </form>
+    <p>ARBA</p>
+    <form method="post" action="">
+        <p>Įrašykite norimo surasti varotojo el. paštą:</p>
+        <label for="from">El. paštas:</label>
+        <input type="text" id="emailSearch" name="emailSearch">
+        <input type="submit" class="btn btn-info" value="Ieškoti apmokėjimų" />
 
-    <table>
+    </form>
+   </center>
+    <center>
+        <div style="width:50%">
+    <table id="PagalData" class="table table-striped">
+        {% if mokejimai|length!=0 %}
+
+        <h3 id="label" class="divTitle">Atliktų mokėjimų sąrašas pagal datą</h3>
         <thead>
         <tr>
             <th>ID</th>
             <th>Suma</th>
-            <th>Išnuomojimo pradžia</th>
-            <th>Išnuomojimo pabaiga</th>
+            <th>Nuomos pradžia</th>
+            <th>Nuomos pabaiga</th>
             <th>Vardas</th>
             <th>Pavardė</th>
             <th>El. paštas</th>
@@ -28,10 +43,8 @@
             <th>Banko kortelės nr.</th>
             <th>Nuomojama įranga</th>
             <th>Įrangos kokybė</th>
-
         </tr>
         </thead>
-
         <tbody>
 
         {% for mokejimas in mokejimai %}
@@ -51,9 +64,62 @@
                 <td>{{ mokejimas.kokybe }}</td>
             </tr>
         {% endfor %}
-
         </tbody>
+        {% endif %}
     </table>
+        </div>
+    </center>
+    <center>
+        <div style="width:50%">
+    <table id="PagalAsmeni" class="table table-striped">
+        {% if  asmensmokejimai|length!=0 %}
+            {% if mokejimai|length!=0 %}
+            <script>var tabledata=document.getElementById("PagalData");
+                var lbl=document.getElementById("label");
+                lbl.parentNode.removeChild(lbl);
+                tabledata.parentNode.removeChild(tabledata)</script>
+                {% endif %}
+            <h3 class="divTitle">Konkretaus asmens atliktų mokėjimų sąrašas</h3>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Suma</th>
+                <th>Nuomos pradžia</th>
+                <th>Nuomos pabaiga</th>
+                <th>Vardas</th>
+                <th>Pavardė</th>
+                <th>El. paštas</th>
+                <th>Asmens kodas</th>
+                <th>Nario ID</th>
+                <th>Banko kortelės nr.</th>
+                <th>Nuomojama įranga</th>
+                <th>Įrangos kokybė</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for mokejimas in asmensmokejimai %}
+
+                <tr>
+                    <td>{{ mokejimas.id }}</td>
+                    <td>{{ mokejimas.suma }}€</td>
+                    <td>{{ mokejimas.isnuomojimoPradzia|date('Y-m-d')}}</td>
+                    <td>{{ mokejimas.isnuomojimoPabaiga|date('Y-m-d') }}</td>
+                    <td>{{ mokejimas.vardas }}</td>
+                    <td>{{ mokejimas.pavarde }}</td>
+                    <td>{{ mokejimas.elPastas }}</td>
+                    <td>{{ mokejimas.asmensKodas }}</td>
+                    <td>{{ mokejimas.narioId }}</td>
+                    <td>{{ mokejimas.bankoKortNumeris }}</td>
+                    <td>{{ mokejimas.iranga }}</td>
+                    <td>{{ mokejimas.kokybe }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        {% endif %}
+    </table>
+        </div>
+    </center>
     <center>
         <br> <input  type="button" value="Grįžti į mokėjimo tipų langą"  class="btn btn-danger" onclick="window.location.href='/admin/mokejimai'"></center>
 

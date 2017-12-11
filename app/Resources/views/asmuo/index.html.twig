@@ -1,9 +1,9 @@
 {% extends '::adminmenu.html.twig' %}
 
 {% block body %}
-    <h1>Vartotojų sąrašas</h1>
-
-    <table>
+    <center><h1>Vartotojų sąrašas</h1>
+<div style="width:70%">
+    <table class="table table-stripped">
         <thead>
             <tr>
                 <th>ID</th>
@@ -23,7 +23,6 @@
                 <td>{{ asmuo.pavarde }}</td>
                 <td>{{ asmuo.elPastas }}</td>
                 <td>{{ asmuo.asmensKodas }}</td>
-                {#<td>{{ asmuo.slaptazodis }}</td>#}
                 <td>{{ asmuo.tipas }}</td>
                 <td>
                     <ul>
@@ -39,10 +38,8 @@
         {% endfor %}
         </tbody>
     </table>
+</div>
+            <a href="{{ path('asmuo_new') }}" class="btn btn-default">Registruoti naują vartotoją</a>
 
-    <ul>
-        <li>
-            <a href="{{ path('asmuo_new') }}">Registruoti naują vartotoją</a>
-        </li>
-    </ul>
+    </center>
 {% endblock %}

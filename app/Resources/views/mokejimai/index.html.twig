@@ -1,8 +1,10 @@
 {% extends '::adminmenu.html.twig' %}
 
 {% block body %}
-    <h1>Pasirinkite, kokio tipo mokėjimą norite peržiūrėti</h1>
+    <center><h1>Pasirinkite, kokio tipo mokėjimą norite peržiūrėti</h1></center>
+<center>
+    <a href="/admin/mokejimai/iranga" class="btn btn-default">Mokėjimai už įrangą</a>
 
-    <a href="/admin/mokejimai/iranga">Mokėjimai už įrangą</a>
-    <a href="/admin/mokejimai/naryste">Mokėjimai už narystę</a>
+    <a href="/admin/mokejimai/naryste" class="btn btn-default">Mokėjimai už narystę</a>
+</center>
  {% endblock %}

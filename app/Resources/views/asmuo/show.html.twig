@@ -1,9 +1,9 @@
 {% extends '::adminmenu.html.twig' %}
 
 {% block body %}
-    <h1>Vartotojas</h1>
-
-    <table>
+   <center> <h1>Vartotojas</h1>
+<div style="width:30%">
+    <table class="table table-striped">
         <tbody>
             <tr>
                 <th>Vardas</th>
@@ -35,18 +35,17 @@
             </tr>
         </tbody>
     </table>
+</div>
+   </center>
 
-    <ul>
-        <li>
-            <a href="{{ path('asmuo_index') }}">Atgal į sąrašą</a>
-        </li>
-        <li>
-            <a href="{{ path('asmuo_edit', { 'id': asmuo.id }) }}">Redaguoti</a>
-        </li>
-        <li>
+
+           <center> <a href="{{ path('asmuo_index') }}" class="btn btn-default">Atgal į sąrašą</a>
+
+
+            <a href="{{ path('asmuo_edit', { 'id': asmuo.id }) }}" class="btn btn-default">Redaguoti</a>
+
             {{ form_start(delete_form) }}
                 <input type="submit" value="Šalinti">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+           </center>
 {% endblock %}

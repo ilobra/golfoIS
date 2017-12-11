@@ -16,7 +16,7 @@ class Narys
     /**
      * @var string
      * 
-     * @ORM\Column(name="banko_kort_numeris", type="string", length=20, nullable=false)
+     * @ORM\Column(name="banko_kort_numeris", type="string", length=20, nullable=true)
      */
     private $bankoKortNumeris;
 

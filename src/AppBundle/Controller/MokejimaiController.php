@@ -24,54 +24,71 @@ class MokejimaiController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $datanuo=$request->request->get('datepicker');
-        $dataiki=$request->request->get('datepicker2');
+        return $this->render('mokejimai/index.html.twig', array(
 
-       // $data = new Date();
-//        $form = $this->$this->createFormBuilder()
-//            ->add('datanuo', $datanuo)
-//            ->add('dataiki', $dataiki)
-//            ->getForm();
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
+        ));
 
-            $userDatenuo = $request->request->get('datepicker');
+    }
+    /**
+     * Lists all mokejimai entities.
+     *
+     * @Route("/iranga", name="uziranga")
+     * @Method("GET")
+     */
+    public function irangosMokejimaiAction(Request $request)
+    {
 
-            $userDateiki = $request->request->get('datepicker2');
+        $datanuo=$request->query->get('from');
+        $dataiki=$request->query->get('to');
+        $em = $this->getDoctrine()->getManager();
 
-          //  $em = $this->getDoctrine()->getManager();
-           // $em->persist($userDatenuo);
-        //    $em->persist($userDateiki);
-         //   $em->flush();
-
-            //return $this->redirectToRoute('asmuo_show', array('id' => $asmuo->getId()));
-
-
-            $em = $this->getDoctrine()->getManager();
-
-
-            $sql = $em->createQuery('
+        $parameters = array(
+            'nuo' => $datanuo
+        ,'iki' => $dataiki
+        );
+                $sql = $em->createQuery('
             		SELECT ia.id, ia.suma, ia.isnuomojimoPradzia, ia.isnuomojimoPabaiga, 
             		a.vardas, a.pavarde, a.elPastas, a.asmensKodas, a.id AS narioId, 
             		n.bankoKortNumeris, it.name AS iranga, i.kokybe 
-            		FROM AppBundle:IrangosApmokejimas ia
-            		LEFT JOIN AppBundle:Iranga i WITH ia.fkIrangaid=i.id
-            		LEFT JOIN AppBundle:Narys n WITH ia.fkNarysid=n.id
-            		LEFT JOIN AppBundle:IrangosTipas it WITH i.tipas=it.idIrangosTipas
-            		LEFT JOIN AppBundle:Asmuo a WITH n.id=a.id
-            		');
-//            		WHERE ia.isnuomojimoPradzia=:nuo AND ia.isnuomojimoPradzia=:iki
-//            ')->setParameter('nuo',$userDatenuo)
-//        ->setParameter('iki',$userDateiki);
+            		FROM AppBundle:IrangosApmokejimas ia, AppBundle:Iranga i, AppBundle:Narys n, AppBundle:IrangosTipas it, AppBundle:Asmuo a
+            		WHERE ia.fkIrangaid=i.id AND ia.fkNarysid=n.id AND i.tipas=it.idIrangosTipas
+            		AND n.id=a.id AND ia.isnuomojimoPradzia >= :nuo AND ia.isnuomojimoPradzia <= :iki
+            ')->setParameters($parameters);
 
-            $results = $sql->getResult();
-       // }
-        return $this->render('mokejimai/index.html.twig', array(
+        $results = $sql->getResult();
+
+        return $this->render('mokejimai/uziranga.html.twig', array(
             'mokejimai' => $results,
-
-            //'tipas'=>$type,
         ));
     }
 
+    /**
+     * Lists all mokejimai entities.
+     *
+     * @Route("/naryste", name="uznaryste")
+     * @Method("GET")
+     */
+    public function narystesMokejimaiAction(Request $request)
+    {
+        $datanuo=$request->query->get('from');
+        $dataiki=$request->query->get('to');
+        $em = $this->getDoctrine()->getManager();
+
+        $sql = $em->createQuery('
+            		SELECT na.id, a.id AS narioId, n.bankoKortNumeris, a.vardas, a.pavarde,a.elPastas, a.asmensKodas,
+            		na.suma, na.narystesPradzia,na.narystesPabaiga
+            		FROM AppBundle:Narys n, AppBundle:Asmuo a, AppBundle:NarystesApmokejimas na
+            		WHERE n.id=a.id AND n.id=na.fkNarysid
+            		AND na.narystesPradzia>=:nuo AND na.narystesPradzia<=:iki
+            ')->setParameter('nuo',$datanuo)
+       ->setParameter('iki',$dataiki);
+
+        $results = $sql->getResult();
+
+
+        return $this->render('mokejimai/uznaryste.html.twig', array(
+            'narystes' => $results,
+
+        ));
+    }
 }

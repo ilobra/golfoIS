@@ -12,7 +12,7 @@
             <a href="{{ path('asmuo_index') }}" class="btn btn-default">Atgal į sąrašą</a>
 
             {{ form_start(delete_form) }}
-                <input type="submit" value="Šalinti">
+        <input onclick="return confirm('Ar tikrai norite pašalinti varototoją?')" type="submit" value="Šalinti">
             {{ form_end(delete_form) }}
     </center>
 {% endblock %}

@@ -46,6 +46,7 @@ class AsmuoController extends Controller
     public function newAction(Request $request)
     {
         $asmuo = new Asmuo();
+        $member=new Member();
         $form = $this->createForm('AppBundle\Form\AsmuoType', $asmuo);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
@@ -74,6 +75,13 @@ class AsmuoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($asmuo);
             $em->flush();
+            if($userType==6||$userType==5)
+            { $id = $asmuo->getId();
+            $memberId = $em ->getRepository('AppBundle:Asmuo')
+                ->find($id); //default: member id
+            $member->setId($memberId);
+            $em->persist($member);
+            $em->flush();}
 
             return $this->redirectToRoute('asmuo_show', array('id' => $asmuo->getId()));
         }

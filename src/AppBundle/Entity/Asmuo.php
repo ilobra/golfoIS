@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="Asmuo", indexes={@ORM\Index(name="tipas", columns={"tipas"})})
  * @ORM\Entity
   * @UniqueEntity(fields={"asmensKodas"}, message="Toks vartotojas jau egzistuoja!")
- * @UniqueEntity(fields={"elPastas"}, message="Vartotojas, su tokiu el. paštu, jau egzistuoja!")
+ * @UniqueEntity(fields={"elPastas"}, message="Vartotojas su tokiu el. paštu jau egzistuoja!")
  */
 class Asmuo implements UserInterface
 {
@@ -56,6 +56,10 @@ class Asmuo implements UserInterface
      *      max = 11,
      *      maxMessage = "Asmens kodas negali viršyti {{ limit }} simbolių!"
      * )
+     * @Assert\Regex(
+     *        pattern="/^([1-9][0-9]*)$/",
+     *        message="Asmens kodas turi būti sudarytas iš skaičių!"
+     *      )
      * @ORM\Column(name="asmens_kodas", type="string", length=11, nullable=false)
      */
     private $asmensKodas;

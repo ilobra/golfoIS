@@ -1,10 +1,14 @@
 {% extends "::usermenu.html.twig" %}
 
+{% block title %}Reitingas{% endblock %}
+
 {% block body %}
-<h1>Bendras geriausių žaidėjų sąrašas</h1>
 
 
-<table>
+ <center>
+    <h3 class="divTitle">BENDRAS GERIAUSIŲ ŽAIDĖJŲ SĄRAŠAS</h3>
+<div style="width:50%">
+<table class="table table-striped">
     <thead>
     <tr>
         <th>#</th>
@@ -36,4 +40,6 @@
 
     </tbody>
 </table>
+</div>
+</center>
 {% endblock %}

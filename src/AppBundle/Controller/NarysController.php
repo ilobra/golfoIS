@@ -369,7 +369,7 @@ class NarysController extends Controller
                     SELECT z.data, z.pradziosLaikas, z.pabaigosLaikas, z.id, a.aikstynoInfo
                     FROM AppBundle:ZaidimoRezervacija z, AppBundle:Aikstynas a
                     WHERE z.fkNarysid = :userid AND z.fkAikstynasid = a.id AND z.data>=CURRENT_DATE()
-            ')->setParameter('userid', $userid);
+            ORDER BY z.data, z.pradziosLaikas')->setParameter('userid', $userid);
 
 
          $reservations = $sql->getResult();
@@ -430,7 +430,7 @@ class NarysController extends Controller
                     SELECT z.data, z.pradziosLaikas, z.pabaigosLaikas, z.id, a.aikstynoInfo, z.pavadinimas, t.id as tid
                     FROM AppBundle:ZaidimoRezervacija z, AppBundle:Aikstynas a, AppBundle:Turnyras t
                     WHERE t.fkNarysid = :userid AND z.fkAikstynasid = a.id AND t.fkZaidimoRezervacijaid = z.id AND z.data>=CURRENT_DATE()
-            ')->setParameter('userid', $userid);
+            ORDER BY z.data')->setParameter('userid', $userid);
 
 
          $tournments = $sql->getResult();

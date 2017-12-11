@@ -1,16 +1,14 @@
 {% extends '::adminmenu.html.twig' %}
 
 {% block body %}
-    <h1>Naujo vartotojo registravimas</h1>
+  <center>  <h1>Naujo vartotojo registravimas</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <input type="submit" value="Užregistruoti" />
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('asmuo_index') }}">Atgal į sąrašą</a>
-        </li>
-    </ul>
+
+            <a href="{{ path('asmuo_index') }}" class="btn btn-default">Atgal į sąrašą</a>
+        </center>
 {% endblock %}

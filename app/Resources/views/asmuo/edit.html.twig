@@ -1,21 +1,18 @@
 {% extends '::adminmenu.html.twig' %}
 
 {% block body %}
-    <h1>Redaguoti vartotoją</h1>
+    <center><h1>Redaguoti vartotoją</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input type="submit" value="Koreguoti" />
     {{ form_end(edit_form) }}
+    </center>
+    <center>
+            <a href="{{ path('asmuo_index') }}" class="btn btn-default">Atgal į sąrašą</a>
 
-    <ul>
-        <li>
-            <a href="{{ path('asmuo_index') }}">Atgal į sąrašą</a>
-        </li>
-        <li>
             {{ form_start(delete_form) }}
                 <input type="submit" value="Šalinti">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    </center>
 {% endblock %}

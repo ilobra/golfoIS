@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * NarystesApmokėjimas
+ * NarystesApmokejimas
  *
- * @ORM\Table(name="Narystes_apmokėjimas", indexes={@ORM\Index(name="VIP_narys_atlieka", columns={"fk_Narysid"})})
+ * @ORM\Table(name="Narystes_apmokejimas", indexes={@ORM\Index(name="VIP_narys_atlieka", columns={"fk_Narysid"})})
  * @ORM\Entity
  */
-class NarystesApmokėjimas
+class NarystesApmokejimas
 {
     /**
      * @var string

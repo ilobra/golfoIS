@@ -39,51 +39,52 @@
     </nav>
 
 {% endblock %}
-{% block title %}Golfo klubo IS{% endblock %}
+
 
 {% block body %}
-{% block javascripts %}
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-    <script>
-        $(function(){
-            $( "#datepicker" ).datepicker({
-                changeMonth: true,
-                changeYear: true,
-                yearRange: "-0:+2",
-                minDate: new Date(),
-                setDate: new Date(),
-                dateFormat: 'yy-mm-dd',
-                dayNamesMin: ["S", "Pr", "A", "T", "K", "Pn", "Š"],
-                beforeShowDay: function (date) {
-                    var list=["S", "Pr", "A", "T", "K", "Pn", "Š"];
-                    var day = date.getDay();
-                    var curr=list[day];
-                    return [true, "",""+curr+""]; },
-                monthNamesShort: ["Saus", "Vas", "Kov", "Bal", "Geg", "Birž", "Liep", "Rugpj", "Rugs", "Spal", "Lapkr", "Gruo"],
-                nextText: ">",
-                prevText: "<"
-            });
-        });
-        $(function(){
-            $( "#datepicker2" ).datepicker({
-                changeMonth: true,
-                changeYear: true,
-                yearRange: "-0:+2",
-                minDate: new Date(),
-                setDate: new Date(),
-                dateFormat: 'yy-mm-dd',
-                dayNamesMin: ["S", "Pr", "A", "T", "K", "Pn", "Š"],
-                beforeShowDay: function (date) {
-                    var list=["S", "Pr", "A", "T", "K", "Pn", "Š"];
-                    var day = date.getDay();
-                    var curr=list[day];
-                    return [true, "",""+curr+""]; },
-                monthNamesShort: ["Saus", "Vas", "Kov", "Bal", "Geg", "Birž", "Liep", "Rugpj", "Rugs", "Spal", "Lapkr", "Gruo"],
-                nextText: ">",
-                prevText: "<"
-            });
-        });
-    </script>
-{% endblock %}
+
+
+    {#<script src="http://code.jquery.com/jquery-1.10.2.js"></script>#}
+    {#<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>#}
+    {#<script>#}
+        {#$(function(){#}
+            {#$( "#datepicker" ).datepicker({#}
+                {#changeMonth: true,#}
+                {#changeYear: true,#}
+                {#yearRange: "-0:+2",#}
+                {#minDate: new Date(),#}
+                {#setDate: new Date(),#}
+                {#dateFormat: 'yy-mm-dd',#}
+                {#dayNamesMin: ["S", "Pr", "A", "T", "K", "Pn", "Š"],#}
+                {#beforeShowDay: function (date) {#}
+                    {#var list=["S", "Pr", "A", "T", "K", "Pn", "Š"];#}
+                    {#var day = date.getDay();#}
+                    {#var curr=list[day];#}
+                    {#return [true, "",""+curr+""]; },#}
+                {#monthNamesShort: ["Saus", "Vas", "Kov", "Bal", "Geg", "Birž", "Liep", "Rugpj", "Rugs", "Spal", "Lapkr", "Gruo"],#}
+                {#nextText: ">",#}
+                {#prevText: "<"#}
+            {#});#}
+        {#});#}
+        {#$(function(){#}
+            {#$( "#datepicker2" ).datepicker({#}
+                {#changeMonth: true,#}
+                {#changeYear: true,#}
+                {#yearRange: "-0:+2",#}
+                {#minDate: new Date(),#}
+                {#setDate: new Date(),#}
+                {#dateFormat: 'yy-mm-dd',#}
+                {#dayNamesMin: ["S", "Pr", "A", "T", "K", "Pn", "Š"],#}
+                {#beforeShowDay: function (date) {#}
+                    {#var list=["S", "Pr", "A", "T", "K", "Pn", "Š"];#}
+                    {#var day = date.getDay();#}
+                    {#var curr=list[day];#}
+                    {#return [true, "",""+curr+""]; },#}
+                {#monthNamesShort: ["Saus", "Vas", "Kov", "Bal", "Geg", "Birž", "Liep", "Rugpj", "Rugs", "Spal", "Lapkr", "Gruo"],#}
+                {#nextText: ">",#}
+                {#prevText: "<"#}
+            {#});#}
+        {#});#}
+    {#</script>#}
+{#{% endblock %}#}
 {% endblock %}

@@ -1,4 +1,3 @@
-{#{% extends "usermenu.html.twig" %}#}
 {% block head %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -18,15 +17,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
                 <li><form class="navbar-form navbar-left">
-                        {# <a href="{{ path('homepage') }}" role="button" class="btn btn-info" style="width: 80px">Pradžia</a> #}
                         <a href="{{ path('profileadm') }}" role="button" class="btn btn-info" style="width: 150px">Paskyra</a>
-                        {#<a href="{{ path('history') }}" role="button" class="btn btn-info" style="width: 150px">Žaidimų istorija</a>#}
-                        {#<a href="{{ path('reservation') }}" role="button" class="btn btn-info" style="width: 150px">Rezervacijos</a>#}
-                        {#<a href="{{ path('tournments') }}" role="button" class="btn btn-info" style="width: 150px">Turnyrai</a>#}
-                        {#<a href="{{ path('equipment') }}" role="button" class="btn btn-info" style="width: 150px">Įranga</a>#}
+                        <a href="{{ path('tournaments') }}" role="button" class="btn btn-info" style="width: 150px">Turnyrai</a>
                         <a href="{{ path('mokejimai_index') }}" role="button" class="btn btn-info" style="width: 150px">Mokėjimai</a>
                         <a href="{{ path('asmuo_index') }}" role="button" class="btn btn-info" style="width: 150px">Vartotojų valdymas</a>
-                        <a href="{{ path('ranking') }}" role="button" class="btn btn-info" style="width: 150px">Reitingas</a>
                         <a href="/logout" role="button" class="btn btn-danger" style="width: 150px; ">Atsijungti</a>
                     </form></li>
             </ul>
@@ -43,48 +37,4 @@
 
 {% block body %}
 
-
-    {#<script src="http://code.jquery.com/jquery-1.10.2.js"></script>#}
-    {#<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>#}
-    {#<script>#}
-        {#$(function(){#}
-            {#$( "#datepicker" ).datepicker({#}
-                {#changeMonth: true,#}
-                {#changeYear: true,#}
-                {#yearRange: "-0:+2",#}
-                {#minDate: new Date(),#}
-                {#setDate: new Date(),#}
-                {#dateFormat: 'yy-mm-dd',#}
-                {#dayNamesMin: ["S", "Pr", "A", "T", "K", "Pn", "Š"],#}
-                {#beforeShowDay: function (date) {#}
-                    {#var list=["S", "Pr", "A", "T", "K", "Pn", "Š"];#}
-                    {#var day = date.getDay();#}
-                    {#var curr=list[day];#}
-                    {#return [true, "",""+curr+""]; },#}
-                {#monthNamesShort: ["Saus", "Vas", "Kov", "Bal", "Geg", "Birž", "Liep", "Rugpj", "Rugs", "Spal", "Lapkr", "Gruo"],#}
-                {#nextText: ">",#}
-                {#prevText: "<"#}
-            {#});#}
-        {#});#}
-        {#$(function(){#}
-            {#$( "#datepicker2" ).datepicker({#}
-                {#changeMonth: true,#}
-                {#changeYear: true,#}
-                {#yearRange: "-0:+2",#}
-                {#minDate: new Date(),#}
-                {#setDate: new Date(),#}
-                {#dateFormat: 'yy-mm-dd',#}
-                {#dayNamesMin: ["S", "Pr", "A", "T", "K", "Pn", "Š"],#}
-                {#beforeShowDay: function (date) {#}
-                    {#var list=["S", "Pr", "A", "T", "K", "Pn", "Š"];#}
-                    {#var day = date.getDay();#}
-                    {#var curr=list[day];#}
-                    {#return [true, "",""+curr+""]; },#}
-                {#monthNamesShort: ["Saus", "Vas", "Kov", "Bal", "Geg", "Birž", "Liep", "Rugpj", "Rugs", "Spal", "Lapkr", "Gruo"],#}
-                {#nextText: ">",#}
-                {#prevText: "<"#}
-            {#});#}
-        {#});#}
-    {#</script>#}
-{#{% endblock %}#}
 {% endblock %}

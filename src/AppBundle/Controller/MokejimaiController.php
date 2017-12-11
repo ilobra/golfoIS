@@ -54,6 +54,7 @@ class MokejimaiController extends Controller
             		FROM AppBundle:IrangosApmokejimas ia, AppBundle:Iranga i, AppBundle:Narys n, AppBundle:IrangosTipas it, AppBundle:Asmuo a
             		WHERE ia.fkIrangaid=i.id AND ia.fkNarysid=n.id AND i.tipas=it.idIrangosTipas
             		AND n.id=a.id AND ia.isnuomojimoPradzia >= :nuo AND ia.isnuomojimoPradzia <= :iki
+            		ORDER BY ia.isnuomojimoPradzia ASC
             ')->setParameters($parameters);
 
 
@@ -65,6 +66,7 @@ class MokejimaiController extends Controller
             		FROM AppBundle:IrangosApmokejimas ia, AppBundle:Iranga i, AppBundle:Narys n, AppBundle:IrangosTipas it, AppBundle:Asmuo a
             		WHERE ia.fkIrangaid=i.id AND ia.fkNarysid=n.id AND i.tipas=it.idIrangosTipas
             		AND n.id=a.id AND a.elPastas=:searchEmail
+            		ORDER BY ia.isnuomojimoPradzia ASC
             ')->setParameter('searchEmail',$searchemail);
         $resultsemail=$sqlemail->getResult();
 
@@ -93,6 +95,7 @@ class MokejimaiController extends Controller
             		FROM AppBundle:Narys n, AppBundle:Asmuo a, AppBundle:NarystesApmokejimas na
             		WHERE n.id=a.id AND n.id=na.fkNarysid
             		AND na.narystesPradzia>=:nuo AND na.narystesPradzia<=:iki
+            		ORDER BY na.narystesPradzia ASC
             ')->setParameter('nuo',$datanuo)
        ->setParameter('iki',$dataiki);
 
@@ -103,7 +106,8 @@ class MokejimaiController extends Controller
             		na.suma, na.narystesPradzia,na.narystesPabaiga
             		FROM AppBundle:Narys n, AppBundle:Asmuo a, AppBundle:NarystesApmokejimas na
             		WHERE n.id=a.id AND n.id=na.fkNarysid
-            		AND a.elPastas=:searchEmail
+            		AND a.elPastas=:searchEmail 
+            		ORDER BY na.narystesPradzia ASC
             ')->setParameter('searchEmail',$searchemail);
 
         $resultsemail = $sqlemail->getResult();

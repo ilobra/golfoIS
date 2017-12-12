@@ -1,0 +1,56 @@
+{% extends "::personnelmenu.html.twig" %}
+
+
+
+{% block body %}
+
+    <center>
+        <div style="width:50%">
+            <h3 class="divTitle">DIENOS TVARKYMAI</h3>
+            <i><p> Aikštynų tvarkymų laikai skirstomi į: 11-12 arba 15-16 valandas </p></i><br>
+
+            {% for aikstynas in aikstynai %}
+            <table class="table table-striped">
+                <thead>
+                    <th style="border:1px solid grey " colspan="3">
+                        <div style="text-align:center">{{ aikstynas.aikstynoInfo }}</div>
+                    </th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td width="30%"> {{ data|date('Y-m-d') }}</td>
+                    <td width="30%"> {{ laikasRyt|date('H:i:s') }} - {{ laikasRyt1|date('H:i:s') }}</td>
+                    {% set break = false %}
+                    {% for dalyvau in dalyvauja if not break %}
+                        {% if dalyvau.id == aikstynas.id %}
+                            <td><i> Šis aikštynas užregistruotas</i></td>
+                            {% set break = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if not break %}
+                     <td> <a href={{ path('aikstyno_tvarkymas_add', {'id': aikstynas.id, 'data': data, 'laikasPr': laikasRyt, 'laikasPab': laikasRyt1 }) }}>Pasirinkti šį laiką</a></td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td> {{ data|date('Y-m-d') }}</td>
+                    <td> {{ laikasDien|date('H:i:s') }} - {{ laikasDien1|date('H:i:s') }}</td>
+                    {% set break = false %}
+                    {% for dalyvau in dalyvauja if not break %}
+                        {% if dalyvau.id == aikstynas.id %}
+                            <td><i> Šis aikštynas užregistruotas</i></td>
+                            {% set break = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if not break %}
+                    <td> <a href={{ path('aikstyno_tvarkymas_add', {'id': aikstynas.id, 'data': data, 'laikasPr': laikasDien, 'laikasPab': laikasDien1 }) }}>Pasirinkti šį laiką</a></td>
+                    {% endif %}
+                </tr>
+                </tbody>
+            </table>
+            {% endfor %}
+
+        </table>
+    </div>
+</center>
+
+{% endblock %}

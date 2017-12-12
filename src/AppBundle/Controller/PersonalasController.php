@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Aikstynas;
+use AppBundle\Entity\AikstynoTvarkymas;
 use AppBundle\Entity\Asmuo;
 use AppBundle\Entity\StovejimoAikstele;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -85,8 +87,7 @@ class PersonalasController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $userid = $this->getUser()->getId();
-        $user = $em ->getRepository('AppBundle:Asmuo')
-            ->find($userid);
+        $user = $em ->getRepository('AppBundle:Asmuo')->find($userid);
 
         $sql = $em->createQuery('
                     SELECT SA.vietosNr, SA.priskyrimoData, SA.id, A.vardas, A.elPastas
@@ -159,5 +160,140 @@ class PersonalasController extends Controller
 
     // GOLFO AIKŠTYNO DARBUOTOJŲ FUNKCIJOS
 
+    /**
+     * @Route("personnel/aikstyno_tvarkymas", name="aikstyno_tvarkymas_index")
+     */
+    public function aikstynoTvarkymasIndex(){
 
+        $em = $this->getDoctrine()->getManager();
+        $userid = $this->getUser()->getId();
+        $user = $em ->getRepository('AppBundle:Asmuo')->find($userid);
+
+        $data = new \DateTime();
+
+        $sql = $em->createQuery('
+                    SELECT ait.data, ait.pradziosLaikas, ait.pabaigosLaikas, ai.aikstynoInfo, ait.id
+                    FROM AppBundle:AikstynoTvarkymas ait, AppBundle:Aikstynas ai
+                    WHERE ai.id = ait.fkAikstynasid AND ait.fkDarbuotojasid = :id
+            		ORDER BY ait.data DESC, ai.aikstynoInfo ASC, ait.pradziosLaikas DESC ')->setParameter('id', $userid);
+        $rezervuotiLaikai = $sql->getResult();
+
+
+
+        return $this->render('personalas/aikstyno_tvarkymas_index.html.twig', array(
+            'asmuo' => $user,
+            'data' => $data,
+            'laikai' =>$rezervuotiLaikai,
+        ));
+    }
+
+    /**
+     * @Route("personnel/aikstyno_tvarkymas/show", name="aikstyno_tvarkymas_index_date")
+     */
+    public function aikstynoTvarkymasIndexDate(Request $request){
+
+        $userid = $this->getUser()->getId();
+        $em = $this->getDoctrine()->getManager();
+        $user = $em ->getRepository('AppBundle:Asmuo')->find($userid);
+
+        $userDate = $request->request->get('date');
+
+        $timeMor1 = '11:00:00';
+        $timeMor2 = '12:00:00';
+        $timeDay1 = '15:00:00';
+        $timeDay2 = '16:00:00';
+
+        $sql = $em->createQuery('
+                    SELECT aik.id, aik.aikstynoInfo
+                    FROM AppBundle:Aikstynas aik
+            		ORDER BY aik.aikstynoInfo DESC');
+        $aikstynai = $sql->getResult();
+
+        $sql = $em->createQuery('
+            		SELECT IDENTITY(t.fkAikstynasid) AS id 
+            		FROM AppBundle:AikstynoTvarkymas t
+            		WHERE t.data = :dat')->setParameters(['dat' => $userDate ]);
+
+        $results1 = $sql->getResult();
+
+        return $this->render('personalas/aikstyno_tvarkymas_show.html.twig', array(
+            'asmuo' => $user,
+            'aikstynai' => $aikstynai,
+            'laikasRyt' => $timeMor1,
+            'laikasRyt1' => $timeMor2,
+            'laikasDien' => $timeDay1,
+            'laikasDien1' => $timeDay2,
+            'data' => $userDate,
+            'dalyvauja' => $results1,
+        ));
+    }
+
+    /**
+     * @Route("personnel/aikstyno_tvarkymas/{id}/add/{data}/{laikasPr}/{laikasPab}", name="aikstyno_tvarkymas_add")
+     */
+    public function aikstynoTvarkymasAdd(Request $request, Aikstynas $id, string $data, string $laikasPr, string $laikasPab){
+
+        $userid = $this->getUser()->getId();
+        $em = $this->getDoctrine()->getManager();
+        $user = $em ->getRepository('AppBundle:Asmuo')->find($userid);
+        $darbuotojas = $em->getRepository('AppBundle:Darbuotojas')->find($userid);
+
+        $result = new AikstynoTvarkymas();
+        $data1 = \DateTime::createFromFormat('Y-m-d', $data);
+        $laikasPr1 = \DateTime::createFromFormat('H:i:s', $laikasPr);
+        $laikasPab1 = \DateTime::createFromFormat('H:i:s', $laikasPab);
+
+
+            $result->setData($data1);
+            $result->setPabaigosLaikas($laikasPab1);
+            $result->setPradziosLaikas($laikasPr1);
+            $form = $this->createForm('AppBundle\Form\AikstynoTvarkymasType', $result);
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $result->setFkDarbuotojasid($darbuotojas);
+                $result->setFkAikstynasid($id);
+                $em->persist($result);
+                $em->flush();
+
+                $this->getDoctrine()->getManager()->flush();
+                return $this->redirectToRoute('aikstyno_tvarkymas_index', array('id' => $userid));
+            }
+
+        return $this->render('personalas/aikstyno_tvarkymas_add.html.twig',
+            [   'asmuo' => $user,
+                'form' => $form->createView(),
+                ]);
+
+    }
+    /**
+     * @Route("personnel/aikstyno_tvarkymas/{id}/edit", name="aikstyno_tvarkymas_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function aikstynoTvarkymasEdit(Request $request, AikstynoTvarkymas $id){
+
+        $userid = $this->getUser()->getId();
+        $em = $this->getDoctrine()->getManager();
+        $user = $em ->getRepository('AppBundle:Asmuo')->find($userid);
+        $tvarkymas = $em ->getRepository('AppBundle:AikstynoTvarkymas')->find($id);
+
+
+        $editForm = $this->createForm('AppBundle\Form\AikstynoTvarkymasType', $tvarkymas);
+        $editForm->handleRequest($request);
+
+        $em->persist($tvarkymas);
+        $em->flush();
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('aikstyno_tvarkymas_index', array('id' => $userid));
+        }
+        return $this->render('personalas/aikstyno_tvarkymai_edit.html.twig', array(
+            'asmuo' => $user,
+            'edit_form' => $editForm->createView(),
+
+        ));
+    }
 }

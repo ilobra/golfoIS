@@ -1,6 +1,7 @@
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>{% block title %}Golfo IS {% endblock %}</title>
 </head>
 <body>
     <nav class="navbar navbar-inverse">
@@ -20,6 +21,9 @@
                         <a href="{{ path('profile_personnel') }}" role="button" class="btn btn-info" style="width: 150px">Paskyra</a>
                         {% if asmuo.getTipas() == 'stovejimo_aiksteles_darbuotojas' %}
                             <a href="{{ path('stovejimo_aikstele_index') }}" role="button" class="btn btn-info" style="width: 150px">Stovėjimo Aikštelė</a>
+                        {% endif %}
+                        {% if asmuo.getTipas() == 'golfo_aikstyno_darbuotojas' %}
+                            <a href="{{ path('aikstyno_tvarkymas_index') }}" role="button" class="btn btn-info" style="width: 150px">Aikštyno tvarkymas</a>
                         {% endif %}
                         <a href="/logout" role="button" class="btn btn-danger" style="width: 150px; ">Atsijungti</a>
                     </form></li>

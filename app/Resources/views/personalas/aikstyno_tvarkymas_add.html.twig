@@ -1,0 +1,18 @@
+{% extends "::personnelmenu.html.twig" %}
+{% block body %}
+
+<div style="padding-left: 30px">
+    <div class="box" style="padding-left:30px; width: 40%; border:1px solid #750b20; display:block; margin: auto">
+    	<center><b><h2>TVARKYMO REGISTRAVIMAS</h2></b></center>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}<br>
+    <center><input type="submit" class="btn btn-info" value="Patvirtinti" />
+    {{ form_end(form) }}
+    <br><br>
+            <form action="{{ path('aikstyno_tvarkymas_index', {'id': asmuo.getId()}) }}">
+                <input type="submit" class="btn btn-danger" value="Grįžti atgal" />
+            </form></center>
+        </div>
+    </div>
+
+{% endblock %}

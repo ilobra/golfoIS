@@ -1,0 +1,22 @@
+{% extends "vipmenu.html.twig" %}
+
+{% block title %}Redagavimas{% endblock %}
+{% block body %}
+
+{% block content %}
+<div style="padding-left: 30px">
+    <div class="box" style="padding-left:30px; width: 40%; border:1px solid #750b20; display:block; margin: auto">
+    	<center><b><h2>REZULTATO PAKEITIMAS</h2></b></center>
+    {{ form_start(editHistory_form) }}
+    {{ form_widget(editHistory_form) }}
+    <center> <input type="submit" class="btn btn-info" value="Patvirtinti" />
+    {{ form_end(editHistory_form) }}
+    <br><br>
+            <form action="{{ path('history') }}">
+                <input type="submit"  class="btn btn-danger" value="Grįžti atgal" />
+            </form></center>
+        </div>
+    </div>
+{% endblock %}
+
+{% endblock %}

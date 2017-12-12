@@ -1,0 +1,32 @@
+{% extends "::adminmenu.html.twig" %}
+
+{% block title %}Paskyra{% endblock %}
+
+{% block body %}
+    <div style="padding-left: 30px">
+        <div class="box" style="padding-left:30px; width:40%; border:1px solid #750b20; display:block; margin: auto">
+            <center><b><h2 class="divTitle">JŪSŲ DUOMENYS</h2></b></center>
+            <div class="form-group">
+                <b><p class="divContent" >Vardas:</p></b>
+                <input type="text" id="vardas" style="width:200px" class="form-control" name="vardas" value="{{ asmuo.getVardas() }}" disabled/><br>
+
+                <b><p class="divContent" >Pavardė:</p></b>
+                <input type="text" id="pavarde" style="width:200px" class="form-control" name="pavarde" value="{{ asmuo.getPavarde() }}" disabled/><br>
+
+                <b><p class="divContent" >El. paštas:</p></b>
+                <input type="text" id="elPastas" style="width:200px" class="form-control" name="elPastas" value="{{ asmuo.getElPastas() }}" disabled/><br>
+
+                <b><p class="divContent" >Asmens kodas:</p></b>
+                <input type="text" id="asmensKodas" style="width:200px" class="form-control" name="asmensKodas" value="{{ asmuo.getAsmensKodas() }}" disabled/><br>
+
+                <form action="{{ path('profileadm_edit', {'id': asmuo.getId()}) }}">
+                    <input type="submit"  class="btn btn-info" value="Redaguoti paskyrą" />
+                </form>
+
+
+            </div>
+
+
+        </div>
+    </div>
+{% endblock %}

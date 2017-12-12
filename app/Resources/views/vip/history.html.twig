@@ -1,0 +1,55 @@
+{% extends "::vipmenu.html.twig" %}
+
+{% block title %}Rezultatai{% endblock %}
+
+{% block body %}
+
+{% block content %}
+    <center>
+        <div style="width:50%">
+            <h3 class="divTitle">JŪSŲ ĮVESTI REZULTATAI</h2><br>
+
+        
+            {% if kiekis != 0 %}
+            <table class="table table-striped">
+            <thead>
+            <th>ROUNDAI</th>
+            <th>MUŠIMŲ SKAIČIUS</th>
+            <th>AIKŠTYNO INFORMACIJA</th>
+            </thead>
+
+            {% for rezultatas in rezultatai %}
+            <thead>
+            <td> {{ rezultatas.raundas }}</td>
+            <td> {{ rezultatas.musimuSk }}</td>
+            <td> {{ rezultatas.aikstynoInfo }}</td>
+            <td>
+                <a  href={{ path('history_delete', {'id': rezultatas.id}) }} onclick="return confirm('Ar tikrai norite pašalinti savo rezultatą?')">ŠALINTI</a> 
+            </td>
+            <td>
+                <a  href={{ path('history_edit', {'id': rezultatas.id}) }}>REDAGUOTI</a>
+            </td>
+            </thead>
+            {% endfor %}
+        </table>
+
+        <div class="navigation">
+            {{ knp_pagination_render(rezultatai) }}
+        </div>
+
+        {% else %}
+                <h3> Kol kas rezultatų dar neregistravote.</h3>
+        {% endif %}
+    </div>
+</center>
+
+
+        
+
+            <center><form action="{{ path('history_add', {'id': asmuo.getId()}) }}">
+                <input type="submit" class="btn btn-info" value="Įvesti naują" />
+            </form></center>
+
+        </div>
+{% endblock %}
+{% endblock %}

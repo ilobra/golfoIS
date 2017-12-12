@@ -26,6 +26,8 @@ class StovejimoAikstele
      */
     private $priskyrimoData;
 
+
+
     /**
      * @var integer
      *
@@ -45,6 +47,53 @@ class StovejimoAikstele
      */
     private $fkAsmuoid;
 
+    /**
+     * @return string
+     */
+    public function getVietosNr()
+    {
+        return $this->vietosNr;
+    }
+
+    /**
+     * @param string $vietosNr
+     */
+    public function setVietosNr($vietosNr)
+    {
+        $this->vietosNr = $vietosNr;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getPriskyrimoData()
+    {
+        return $this->priskyrimoData;
+    }
+
+    /**
+     * @param \DateTime $priskyrimoData
+     */
+    public function setPriskyrimoData($priskyrimoData)
+    {
+        $this->priskyrimoData = $priskyrimoData;
+    }
+
+    /**
+     * @return Asmuo
+     */
+    public function getFkAsmuoid()
+    {
+        return $this->fkAsmuoid;
+    }
+
+    /**
+     * @param Asmuo $fkAsmuoid
+     */
+    public function setFkAsmuoid($fkAsmuoid)
+    {
+        $this->fkAsmuoid = $fkAsmuoid;
+    }
 
 }
 

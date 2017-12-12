@@ -1,0 +1,48 @@
+{% extends "::personnelmenu.html.twig" %}
+
+{% block title %}Aikstele{% endblock %}
+
+{% block body %}
+
+    <center>
+        <div style="width:50%">
+            <h3 class="divTitle">STOVĖJIMO AIKŠTELĖ</h3><br>
+            {% block flash_messages %}
+                {% for type, messages in app.session.flashbag.all() %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ type }} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            {{ message | raw }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            {% endblock %}
+            <table class="table table-striped">
+            <thead>
+            <th>VIETOS NR.</th>
+            <th>PRISKYRIMO DATA</th>
+            <th>VARTOTOJAS</th>
+            <th>VARTOTOJO PAŠTAS</th>
+            </thead>
+                {% for vieta in vietos %}
+                <tbody>
+                <td> {{ vieta.vietosNr}}</td>
+                {% if vieta.vardas == NULL %}
+                    <td colspan="3" align="center" style="color:red"> Vieta nepriskirta</td>
+                    <td><a  href={{ path('stovejimo_aikstele_add', {'id': vieta.id}) }}>Priskirti</a></td>
+                {% else %}
+                    <td> {{ vieta.priskyrimoData|date('Y-m-d') }}</td>
+                    <td> {{ vieta.vardas }}</td>
+                    <td> {{ vieta.elPastas }}</td>
+                    <td><a  href={{ path('stovejimo_aikstele_delete', {'id': vieta.id}) }} onclick="return confirm('Ar tikrai norite atlaisvinti priskirtą vietą?')">Atlaisvinti</a></td>
+                {% endif %}
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </center>
+    <center><form action="{{ path('homepagePersonal', {'id': asmuo.getId()}) }}">
+            <input type="submit"  class="btn btn-danger"value="Grįžti atgal" />
+        </form></center>
+
+{% endblock %}

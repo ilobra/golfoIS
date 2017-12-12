@@ -31,7 +31,7 @@ class HomepageController extends Controller
         else if ($userRole[0]=="ROLE_VIP") {return $this->redirectToRoute('homepageUser', [ 'id' => $userid ]);}
         else if ($userRole[0]=="ROLE_USER") {return $this->redirectToRoute('homepageUser', [ 'id' => $userid ]);}
 
-        else if($userRole[0]=="ROLE_PERSONAL") {return $this->redirectToRoute('homepageUser', ['id'=>$userid]);}
+        else if($userRole[0]=="ROLE_PERSONAL") {return $this->redirectToRoute('homepagePersonal', ['id'=>$userid]);}
         else return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
@@ -46,8 +46,8 @@ class HomepageController extends Controller
     	
     	$em = $this->getDoctrine()->getManager();
     	$user = $em ->getRepository('AppBundle:Asmuo')
-                         ->find($userid); 
-       
+                         ->find($userid);
+
 		return $this->render('homepage/homepage.html.twig', array(
             	'asmuo' => $user,
         	));
@@ -64,6 +64,22 @@ class HomepageController extends Controller
             ->find($userid);
 
         return $this->render('homepage/homepageAdmin.html.twig', array(
+            'asmuo' => $user,
+        ));
+    }
+
+    /**
+     * @Route("personnel/home/{id}", name="homepagePersonal")
+     */
+    public function personnelHomepage(Asmuo $userid)
+    {
+        $userid = $this->getUser()->getId();
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em ->getRepository('AppBundle:Asmuo')
+            ->find($userid);
+
+        return $this->render('homepage/homepagePersonnel.html.twig', array(
             'asmuo' => $user,
         ));
     }

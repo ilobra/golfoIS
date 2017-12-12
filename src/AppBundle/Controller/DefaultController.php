@@ -28,7 +28,7 @@ class DefaultController extends Controller
             else if ($userRole[0]=="ROLE_VIP") {return $this->redirectToRoute('homepageUser', [ 'id' => $userid ]);}
             else if ($userRole[0]=="ROLE_USER") {return $this->redirectToRoute('homepageUser', [ 'id' => $userid ]);}
 
-            else if($userRole[0]=="ROLE_PERSONAL") {return $this->redirectToRoute('homepageUser', ['id'=>$userid]);}
+            else if($userRole[0]=="ROLE_PERSONAL") {return $this->redirectToRoute('homepagePersonal', ['id'=>$userid]);}
            }
 
 

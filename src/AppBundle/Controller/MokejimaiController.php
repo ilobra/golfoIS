@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 
 /**
@@ -86,6 +87,8 @@ class MokejimaiController extends Controller
     {
         $datanuo=$request->query->get('from');
         $dataiki=$request->query->get('to');
+
+
         $searchemail=$request->request->get('emailSearch');
         $em = $this->getDoctrine()->getManager();
 

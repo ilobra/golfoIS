@@ -119,12 +119,15 @@ INSERT INTO `asmuo` (`id`, `vardas`, `pavarde`, `el_pastas`, `asmens_kodas`, `sl
 (18, 'Ignasioo', 'Ignaitis', 'ignas@gmail.com', '39512141516', '$2y$13$/hDgdCID2QwhfJmThYN8cuhbzf.ydV.Imqiz3n4BOX3fNWs1QRjS.', 5),
 (19, 'Haris', 'Haraitis', 'haris@gmail.com', '39412141314', '$2y$13$8leJUOgSrl9TKFGEO2HuPe.trnfn8dRC29lak1kREiTI47tCsJWi.', 6),
 (20, 'Rasa', 'Rasaitytė', 'rasa@gmail.com', '50005302012', '$2y$13$MgPNI2R4lY.Vn5mkD6HnAOo/hNmx09xxrt.ql1jKWObYcqGbbtZ4S', 5),
-(21, 'vip', 'vipvip', 'vip@gmail.com', '8541212541', '$2y$13$BbLZGFsmMujfh77va0lV/uhufp7OEDiRE1XI2zwbGN.OmrvV.1fbG', 6);
+(21, 'vip', 'vipvip', 'vip@gmail.com', '8541212541', '$2y$13$BbLZGFsmMujfh77va0lV/uhufp7OEDiRE1XI2zwbGN.OmrvV.1fbG', 1),
+(22, 'Stovejimo aiksteles', 'darbuotojas', 'SAdarbuotojas@mail.com', '11111111111', '$2y$13$YTZNcAa1HdwlAW4Yj/zjxOMzPokZqgHfAf2SMyH3sDOmofdw2LWLK', 1),
+(23, 'golfo aiksteles', 'darbuotojas', 'GAdarbuotojas@mail.com', '22222222222', '$2y$13$rSkI8S9FdZd6KJgrt8L3v.xckDuVUDSvFKQRVWrknoEAsLUJRGmfi', 2),
+(24, 'Irangos', 'darbuotojas', 'Idarbuotojas@mail.com', '33333333333', '$2y$13$euVYBbeb9E6XDr12MzuoT.5nYpdvArxf36CwlZaOFJDkle5rKUgUu', 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `darbuotojas`
+-- Table structure for table `personalas`
 --
 
 DROP TABLE IF EXISTS `darbuotojas`;
@@ -134,6 +137,15 @@ CREATE TABLE IF NOT EXISTS `darbuotojas` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
 
+
+--
+-- Dumping data for table `darbuotojas`
+--
+
+INSERT INTO `darbuotojas` (`uzmokestis`, `id`) VALUES
+(350, '22'),
+(400, '23'),
+(450, '24');
 -- --------------------------------------------------------
 
 --
@@ -335,6 +347,16 @@ CREATE TABLE IF NOT EXISTS `stovejimo_aikstele` (
   UNIQUE KEY `fk_Asmuoid` (`fk_Asmuoid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
 
+
+--
+-- Dumping data for table `stovejimo_aikstele`
+--
+
+INSERT INTO `stovejimo_aikstele` (`id`, `vietos_nr`, `priskyrimo_data`, `fk_Asmuoid`) VALUES
+(1, 11, null, null),
+(2, 12, null, null),
+(3, 13, '2013-05-11', 20),
+(4, 14, '2017-11-24', 23);
 -- --------------------------------------------------------
 
 --
@@ -416,7 +438,7 @@ ALTER TABLE `asmuo`
   ADD CONSTRAINT `asmuo_ibfk_1` FOREIGN KEY (`tipas`) REFERENCES `asmens_tipas` (`id_Asmens_tipas`);
 
 --
--- Constraints for table `darbuotojas`
+-- Constraints for table `personalas`
 --
 ALTER TABLE `darbuotojas`
   ADD CONSTRAINT `darbuotojas_ibfk_1` FOREIGN KEY (`id`) REFERENCES `asmuo` (`id`);

@@ -13,10 +13,10 @@
                 <center> <form method="get" action="">
                         <p>Pasirinkite intervalą:</p>
                         <label for="from">Nuo:</label>
-                        <input type="text" id="from" name="from">
+                        <input type="date" id="from" name="from">
 
                         <label for="to">Iki:</label>
-                        <input type="text" id="to" name="to">
+                        <input type="date" id="to" name="to">
                         </br>
                         <input type="submit" class="btn btn-info" value="Ieškoti nurodytu intervalu turnyruose užsiregistravusių žaidėjų" />
 
@@ -69,93 +69,93 @@
         <center>
             <br> <input  type="button" value="Grįžti į turnyrų ataskaitos langą"  class="btn btn-danger" onclick="window.location.href='/admin/tournaments'"></center>
 
-        <style>
-            table.ui-datepicker-calendar{
-                border: 2px solid black;
-                background-color: #eff5f5;
-                padding: 10px;
-                border-spacing: 10px;
-                border-collapse: separate;
-                width: 100%;
-            }
+        {#<style>#}
+            {#table.ui-datepicker-calendar{#}
+                {#border: 2px solid black;#}
+                {#background-color: #eff5f5;#}
+                {#padding: 10px;#}
+                {#border-spacing: 10px;#}
+                {#border-collapse: separate;#}
+                {#width: 100%;#}
+            {#}#}
 
-            .ui-datepicker-title {
-                text-align: center;
-                font-size: 15px;
-                font-weight: bold;
-                padding: 2px;
-                border-top: 2px solid black;
-                border-right: 2px solid black;
-                border-left: 2px solid black;
-                border-bottom: 2px solid black;
-                background-color: #bfd9d9;
-                height: 35px;
-            }
+            {#.ui-datepicker-title {#}
+                {#text-align: center;#}
+                {#font-size: 15px;#}
+                {#font-weight: bold;#}
+                {#padding: 2px;#}
+                {#border-top: 2px solid black;#}
+                {#border-right: 2px solid black;#}
+                {#border-left: 2px solid black;#}
+                {#border-bottom: 2px solid black;#}
+                {#background-color: #bfd9d9;#}
+                {#height: 35px;#}
+            {#}#}
 
-            .ui-datepicker-header{
-                background:-color: white;
-            }
+            {#.ui-datepicker-header{#}
+                {#background:-color: white;#}
+            {#}#}
 
-            .ui-datepicker-prev {
-                margin:auto;
-                float: left;
-                cursor: pointer;
-                background-position: center -30px;
-                font-weight: bold;
-                padding: 10px;
-            }
+            {#.ui-datepicker-prev {#}
+                {#margin:auto;#}
+                {#float: left;#}
+                {#cursor: pointer;#}
+                {#background-position: center -30px;#}
+                {#font-weight: bold;#}
+                {#padding: 10px;#}
+            {#}#}
 
-            .ui-datepicker-next {
-                float: right;
-                cursor: pointer;
-                background-position: center 0px;
-                font-weight: bold;
-                padding: 10px;
-            }
-        </style>
+            {#.ui-datepicker-next {#}
+                {#float: right;#}
+                {#cursor: pointer;#}
+                {#background-position: center 0px;#}
+                {#font-weight: bold;#}
+                {#padding: 10px;#}
+            {#}#}
+        {#</style>#}
 
 
-        {% block javascripts %}
-            <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-            <link rel="stylesheet" href="/resources/demos/style.css">
-            <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-            <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-            <script>
-                $( function() {
-                    var   from = $( "#from" )
-                        .datepicker({
-                            changeMonth: true,
-                            changeYear: true,
-                            yearRange: "-5:+5",
-                            numberOfMonths: 1,
-                            dateFormat:"yy-mm-dd",
-                            dayNamesMin: ["S", "Pr", "A", "T", "K", "Pn", "Š"],
-                            monthNamesShort: ["Saus", "Vas", "Kov", "Bal", "Geg", "Birž", "Liep", "Rugpj", "Rugs", "Spal", "Lapkr", "Gruo"]
+        {#{% block javascripts %}#}
+            {#<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">#}
+            {#<link rel="stylesheet" href="/resources/demos/style.css">#}
+            {#<script src="http://code.jquery.com/jquery-1.10.2.js"></script>#}
+            {#<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>#}
+            {#<script>#}
+                {#$( function() {#}
+                    {#var   from = $( "#from" )#}
+                        {#.datepicker({#}
+                            {#changeMonth: true,#}
+                            {#changeYear: true,#}
+                            {#yearRange: "-5:+5",#}
+                            {#numberOfMonths: 1,#}
+                            {#dateFormat:"yy-mm-dd",#}
+                            {#dayNamesMin: ["S", "Pr", "A", "T", "K", "Pn", "Š"],#}
+                            {#monthNamesShort: ["Saus", "Vas", "Kov", "Bal", "Geg", "Birž", "Liep", "Rugpj", "Rugs", "Spal", "Lapkr", "Gruo"]#}
 
-                        })
-                    to = $( "#to" ).datepicker({
-                        changeMonth: true,
-                        changeYear: true,
-                        yearRange: "-5:+5",
-                        numberOfMonths: 1,
-                        dateFormat:"yy-mm-dd",
-                        dayNamesMin: ["S", "Pr", "A", "T", "K", "Pn", "Š"],
-                        monthNamesShort: ["Saus", "Vas", "Kov", "Bal", "Geg", "Birž", "Liep", "Rugpj", "Rugs", "Spal", "Lapkr", "Gruo"]
+                        {#})#}
+                    {#to = $( "#to" ).datepicker({#}
+                        {#changeMonth: true,#}
+                        {#changeYear: true,#}
+                        {#yearRange: "-5:+5",#}
+                        {#numberOfMonths: 1,#}
+                        {#dateFormat:"yy-mm-dd",#}
+                        {#dayNamesMin: ["S", "Pr", "A", "T", "K", "Pn", "Š"],#}
+                        {#monthNamesShort: ["Saus", "Vas", "Kov", "Bal", "Geg", "Birž", "Liep", "Rugpj", "Rugs", "Spal", "Lapkr", "Gruo"]#}
 
-                    })
-                    function getDate( element ) {
-                        var date;
-                        try {
-                            date = $.datepicker.parseDate( dateFormat, element.value );
-                        } catch( error ) {
-                            date = null;
-                        }
+                    {#})#}
+                    {#function getDate( element ) {#}
+                        {#var date;#}
+                        {#try {#}
+                            {#date = $.datepicker.parseDate( dateFormat, element.value );#}
+                        {#} catch( error ) {#}
+                            {#date = null;#}
+                        {#}#}
 
-                        return date;
-                    }
-                } );
-            </script>
+                        {#return date;#}
+                    {#}#}
+                {#} );#}
+            {#</script>#}
 
-        {% endblock %}
+        {#{% endblock %}#}
     {% endblock %}
 {% endblock %}

@@ -56,6 +56,10 @@ class Asmuo implements UserInterface
      *      max = 11,
      *      maxMessage = "Asmens kodas negali viršyti {{ limit }} simbolių!"
      * )
+     * @Assert\Length(
+     *     min =11,
+     *      minMessage="Asmens kodas privalo turėti ne mažiau nei {{ limit }} simbolių!"
+     * )
      * @Assert\Regex(
      *        pattern="/^([1-9][0-9]*)$/",
      *        message="Asmens kodas turi būti sudarytas iš skaičių!"

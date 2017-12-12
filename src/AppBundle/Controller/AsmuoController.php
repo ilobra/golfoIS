@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Asmuo;
+use AppBundle\Entity\Narys;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -46,7 +47,7 @@ class AsmuoController extends Controller
     public function newAction(Request $request)
     {
         $asmuo = new Asmuo();
-        $member=new Member();
+        $member=new Narys();
         $form = $this->createForm('AppBundle\Form\AsmuoType', $asmuo);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();

@@ -28,7 +28,7 @@ class HomepageController extends Controller
         //6 tipui (ROLE_VIP rolei) sukurti homepageVIP twig'ą, 3,2,1 tipams (ROLE_PERSONAL rolei) - homepagePersonal
         $userRole=$user->getRoles();
         if ($userRole[0]=="ROLE_ADMIN"){ return $this->redirectToRoute('homepageAdmin', [ 'id' => $userid ]);}
-        else if ($userRole[0]=="ROLE_VIP") {return $this->redirectToRoute('homepageUser', [ 'id' => $userid ]);}
+        else if ($userRole[0]=="ROLE_VIP") {return $this->redirectToRoute('homepageVIP', [ 'id' => $userid ]);}
         else if ($userRole[0]=="ROLE_USER") {return $this->redirectToRoute('homepageUser', [ 'id' => $userid ]);}
 
         else if($userRole[0]=="ROLE_PERSONAL") {return $this->redirectToRoute('homepagePersonal', ['id'=>$userid]);}
@@ -83,4 +83,20 @@ class HomepageController extends Controller
             'asmuo' => $user,
         ));
     }
+
+    /**
+     * @Route("/vip/home/{id}", name="homepageVIP")
+     */
+    public function vipHomepage(Asmuo $userid)
+    {
+        $userid = $this->getUser()->getId();
+        
+        $em = $this->getDoctrine()->getManager();
+        $user = $em ->getRepository('AppBundle:Asmuo')
+                         ->find($userid); 
+       
+        return $this->render('homepage/homepageVIP.html.twig', array(
+                'asmuo' => $user,
+            ));
+     }
 }

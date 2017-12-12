@@ -43,7 +43,7 @@ class RezervacijosController extends Controller
             $sql = $em->createQuery('
             		SELECT r.data, r.pradziosLaikas, r.id, r.pabaigosLaikas, a.aikstynoInfo
             		FROM AppBundle:ZaidimoRezervacija r, AppBundle:Aikstynas a
-            		WHERE r.data = CURRENT_DATE() AND r.fkAikstynasid = a.id ORDER BY r.data, r.pradziosLaikas');
+            		WHERE r.data = CURRENT_DATE() AND r.fkAikstynasid = a.id ORDER BY r.pradziosLaikas');
 
 		 $results = $sql->getResult();
 

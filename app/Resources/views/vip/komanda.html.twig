@@ -1,0 +1,46 @@
+{% extends "::vipmenu.html.twig" %}
+
+{% block title %}Rezervacijos{% endblock %}
+
+{% block body %}
+
+{% block content %}
+    <center>
+        <div style="width:50%">
+
+            <h3 class="divTitle">Mano komanda</h3>
+            {% if kiekis != 0 %}
+            <table class="table table-striped" style="width:350px">
+            <thead>
+            <th>Pavadinimas</th>
+            <th style="width:100px">Narių kiekis</th>
+            </thead>
+
+            {% for rezultatas in rezultatai %}
+               
+            <thead>
+            <td> {{ rezultatas.pavadinimas }}</td>
+            <td> {{ rezultatas.kiekis }}</td>
+            </thead>
+                
+            {% endfor %}
+        </table>
+        {% else %}
+                <h3 style="border:1px solid #750b20; padding: 10px"> Jūs neturite komandos.</h3>
+        {% endif %}
+    </div>
+</center>
+
+        <br>
+    <center>
+        <form method="post" action="{{ path('create_team', {'id': asmuo.getId()}) }}">
+            <h3> Norite sukurti naują komandą? </h3>
+            <label for="input">Pasirinkite pavadinimą:</label>
+            <input type="text" class="form-control" id="text" name="text" style="width:200px" required=true /><br>
+
+            <input type="submit" class="btn btn-info" value="Sukurti komandą" />
+        </form>
+    </center>
+{% endblock %}
+ {# $username = $request->request->get('_username'); #}
+{% endblock %}

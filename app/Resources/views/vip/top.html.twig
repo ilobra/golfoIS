@@ -1,0 +1,40 @@
+{% extends "::vipmenu.html.twig" %}
+
+{% block title %}Top žaidėjai{% endblock %}
+
+{% block body %}
+
+{% block content %}
+    <center>
+        <div style="width:50%">
+            <h3 class="divTitle">Geriausi žaidėjai</h2><br>
+
+        
+            {% if kiekis != 0 %}
+            <table class="table table-striped">
+            <thead>
+            <th>Vardas</th>
+            <th>Pavardė</th>
+            <th>Ratio</th>
+            </thead>
+
+            {% for rezultatas in rezultatai %}
+            <thead>
+            <td> {{ rezultatas.vardas }}</td>
+            <td> {{ rezultatas.pavarde }}</td>
+            <td> {{ rezultatas.ratio }}</td>
+            </thead>
+            {% endfor %}
+            </table>
+
+        <div class="navigation">
+            {{ knp_pagination_render(rezultatai) }}
+        </div>
+
+        {% else %}
+                <h3> Kol kas rezultatų dar nėra.</h3>
+        {% endif %}
+    </div>
+</center>
+{% endblock %}
+{% endblock %}

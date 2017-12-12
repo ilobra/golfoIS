@@ -266,7 +266,7 @@ class Asmuo implements UserInterface
             $role="ROLE_VIP";
             return ['ROLE_VIP'];
         }
-        else if($this->getTipas()->getIdAsmensTipas()==3||$this->getTipas()->getIdAsmensTipas()==2||$this->getTipas()->getIdAsmensTipas()==1) {//return [ 'ROLE_VIP','ROLE_USER','ROLE_ADMIN','ROLE_PERSONAL' ];
+        else if(($this->getTipas()->getIdAsmensTipas()==3)||($this->getTipas()->getIdAsmensTipas()==2)||($this->getTipas()->getIdAsmensTipas()==1)) {//return [ 'ROLE_VIP','ROLE_USER','ROLE_ADMIN','ROLE_PERSONAL' ];
             $role="ROLE_PERSONAL";
             return ['ROLE_PERSONAL'];
         }
@@ -293,8 +293,12 @@ class Asmuo implements UserInterface
 
     public function __toString()
     {
+        if(is_null($this->username)) {
+            return 'NULL';
+        }
         return $this->username;
     }
+
 
 }
 

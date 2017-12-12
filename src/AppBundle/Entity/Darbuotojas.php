@@ -31,6 +31,22 @@ class Darbuotojas
      */
     private $id;
 
+    /**
+     * @return string
+     */
+    public function getUzmokestis()
+    {
+        return $this->uzmokestis;
+    }
+
+    /**
+     * @param string $uzmokestis
+     */
+    public function setUzmokestis($uzmokestis)
+    {
+        $this->uzmokestis = $uzmokestis;
+    }
+
 
 }
 

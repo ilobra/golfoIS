@@ -1,0 +1,22 @@
+{% extends "::personnelmenu.html.twig" %}
+
+{% block title %}Prideti{% endblock %}
+{% block body %}
+
+{% block content %}
+<div style="padding-left: 30px">
+    <div class="box" style="padding-left:30px; width: 40%; border:1px solid #750b20; display:block; margin: auto">
+    	<center><b><h2>PRISKIRTI VARTOTOJA PRIE AIKSTELES</h2></b></center>
+    {{ form_start(edit_form) }}
+    {{ form_widget(edit_form) }}
+    <center><input type="submit" class="btn btn-info" value="Patvirtinti" />
+    {{ form_end(edit_form) }}
+    <br><br>
+            <form action="{{ path('stovejimo_aikstele_index', {'id': asmuo.getId()}) }}">
+                <input type="submit" class="btn btn-danger" value="Grįžti atgal" />
+            </form></center>
+        </div>
+    </div>
+{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,32 @@
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" style="color:white; font-weight:bold;" href="{{ path('homepage') }}">GOLFO KLUBO IS</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left">
+                <li><form class="navbar-form navbar-left">
+                        <a href="{{ path('profile_personnel') }}" role="button" class="btn btn-info" style="width: 150px">Paskyra</a>
+                        {% if asmuo.getTipas() == 'stovejimo_aiksteles_darbuotojas' %}
+                            <a href="{{ path('stovejimo_aikstele_index') }}" role="button" class="btn btn-info" style="width: 150px">Stovėjimo Aikštelė</a>
+                        {% endif %}
+                        <a href="/logout" role="button" class="btn btn-danger" style="width: 150px; ">Atsijungti</a>
+                    </form></li>
+            </ul>
+        </div>
+    </nav>
+    {% block body %}
+
+    {% endblock %}
+</body>

@@ -29,14 +29,14 @@ class AikstynoTvarkymas
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="pradzios_laikas", type="date", nullable=true)
+     * @ORM\Column(name="pradzios_laikas", type="time", nullable=true)
      */
     private $pradziosLaikas;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="pabaigos_laikas", type="date", nullable=true)
+     * @ORM\Column(name="pabaigos_laikas", type="time", nullable=true)
      */
     private $pabaigosLaikas;
 
@@ -68,6 +68,102 @@ class AikstynoTvarkymas
      * })
      */
     private $fkAikstynasid;
+
+    /**
+     * @return string
+     */
+    public function getKomentaras()
+    {
+        return $this->komentaras;
+    }
+
+    /**
+     * @param string $komentaras
+     */
+    public function setKomentaras($komentaras)
+    {
+        $this->komentaras = $komentaras;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param \DateTime $data
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getPradziosLaikas()
+    {
+        return $this->pradziosLaikas;
+    }
+
+    /**
+     * @param \DateTime $pradziosLaikas
+     */
+    public function setPradziosLaikas($pradziosLaikas)
+    {
+        $this->pradziosLaikas = $pradziosLaikas;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getPabaigosLaikas()
+    {
+        return $this->pabaigosLaikas;
+    }
+
+    /**
+     * @param \DateTime $pabaigosLaikas
+     */
+    public function setPabaigosLaikas($pabaigosLaikas)
+    {
+        $this->pabaigosLaikas = $pabaigosLaikas;
+    }
+
+    /**
+     * @return Darbuotojas
+     */
+    public function getFkDarbuotojasid()
+    {
+        return $this->fkDarbuotojasid;
+    }
+
+    /**
+     * @param Darbuotojas $fkDarbuotojasid
+     */
+    public function setFkDarbuotojasid($fkDarbuotojasid)
+    {
+        $this->fkDarbuotojasid = $fkDarbuotojasid;
+    }
+
+    /**
+     * @return Aikstynas
+     */
+    public function getFkAikstynasid()
+    {
+        return $this->fkAikstynasid;
+    }
+
+    /**
+     * @param Aikstynas $fkAikstynasid
+     */
+    public function setFkAikstynasid($fkAikstynasid)
+    {
+        $this->fkAikstynasid = $fkAikstynasid;
+    }
 
 
 }

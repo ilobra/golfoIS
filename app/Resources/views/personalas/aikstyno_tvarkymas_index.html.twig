@@ -1,0 +1,44 @@
+{% extends "::personnelmenu.html.twig" %}
+{% block body %}
+
+        <center>
+            <div style="width:50%">
+
+                <h3 class="divTitle">AIKŠTYNO TVARKYMAS</h3>
+                <i><p> Aikštynų tvarkymų laikai skirstomi į: 11-12 arba 15-16 valandas </p></i><br>
+
+                {% if laikai != null %}
+                    <h3 class="divTitle">Jūsų rezervacijos</h3><br>
+
+                    <table class="table table-striped">
+                        <tbody>
+                        <th>DATA</th>
+                        <th>LAIKAS</th>
+                        <th colspan="2">AIKŠTYNO INFORMACIJA</th>
+                        </tbody>
+                        {% for laikas in laikai %}
+                        <tbody>
+                        <td> {{ laikas.data|date('Y-m-d') }}</td>
+                        <td> {{ laikas.pradziosLaikas|date('H:i:s') }} - {{ laikas.pabaigosLaikas|date('H:i:s') }}</td>
+                        <td> {{ laikas.aikstynoInfo }}</td>
+                        <td><a  href={{ path('aikstyno_tvarkymas_edit', {'id': laikas.id}) }} >Redaguoti</a></td>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            </div>
+        </center>
+
+
+        <center>
+            <form method="post" action="{{ path('aikstyno_tvarkymas_index_date', {'id': asmuo.getId()}) }}">
+                <h3> Pasirinkite dieną tvarkymui: </h3>
+                <input type="date" class="form-control" name="date" style="width:200px" required=true value="{{ 'now'|date('Y-m-d') }}"> <br>
+                <input type="submit" class="btn btn-info" value="Pasirinkti laiką" />
+            </form>
+        </center>
+
+        </div>
+
+
+{% endblock %}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 12, 2017 at 05:40 PM
+-- Generation Time: Dec 13, 2017 at 10:23 AM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -56,14 +56,25 @@ CREATE TABLE IF NOT EXISTS `aikstyno_tvarkymas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `komentaras` varchar(500) COLLATE utf8_lithuanian_ci DEFAULT NULL,
   `data` date NOT NULL,
-  `pradzios_laikas` date DEFAULT NULL,
-  `pabaigos_laikas` date DEFAULT NULL,
+  `pradzios_laikas` time DEFAULT NULL,
+  `pabaigos_laikas` time DEFAULT NULL,
   `fk_Aikstynasid` int(11) DEFAULT NULL,
   `fk_Darbuotojasid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `tvarkomas` (`fk_Aikstynasid`),
   KEY `tvarko` (`fk_Darbuotojasid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
+
+--
+-- Dumping data for table `aikstyno_tvarkymas`
+--
+
+INSERT INTO `aikstyno_tvarkymas` (`id`, `komentaras`, `data`, `pradzios_laikas`, `pabaigos_laikas`, `fk_Aikstynasid`, `fk_Darbuotojasid`) VALUES
+(1, 'dddds', '2017-12-13', '15:00:00', '16:00:00', 1, 23),
+(2, 'ccccc', '2017-12-15', '15:00:00', '16:00:00', 1, 23),
+(3, 'asdfasdfasdadddddd', '2018-01-04', '11:00:00', '12:00:00', 3, 23),
+(4, 'sdfsf', '2017-12-13', '15:00:00', '16:00:00', 3, 23),
+(5, 'asdasd', '2017-12-22', '11:00:00', '12:00:00', 4, 23);
 
 -- --------------------------------------------------------
 
@@ -107,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `asmuo` (
   `tipas` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `tipas` (`tipas`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
 
 --
 -- Dumping data for table `asmuo`
@@ -115,8 +126,8 @@ CREATE TABLE IF NOT EXISTS `asmuo` (
 
 INSERT INTO `asmuo` (`id`, `vardas`, `pavarde`, `el_pastas`, `asmens_kodas`, `slaptazodis`, `tipas`) VALUES
 (12, 'Jonas', 'Jonaitis', 'jonas.j@gmail.com', '39510121415', '$2y$13$ksPNFV8Jh2nD3ehmKPzoT.S6RgC7AxfJJC.5kGFtnSH14kSKgNxJ2', 5),
-(13, 'Tomas', 'Tomaitis', 'tomas@gmail.com', '39611152326', '$2y$13$uzIL2VVxF.q/wB0Zd.deY.FpesBfPTtTH5EdRtzxQ0VoQadaOWHv6', 5),
-(18, 'Ignas', 'Ignaitis', 'ignas@gmail.com', '39512141516', '$2y$13$/hDgdCID2QwhfJmThYN8cuhbzf.ydV.Imqiz3n4BOX3fNWs1QRjS.', 5),
+(13, 'Tomas', 'Tomaitis', 'tomas@gmail.com', '39611152326', '$2y$13$uzIL2VVxF.q/wB0Zd.deY.FpesBfPTtTH5EdRtzxQ0VoQadaOWHv6', 6),
+(18, 'Ignas', 'Ignaitis', 'ignas@gmail.com', '39512141516', '$2y$13$/hDgdCID2QwhfJmThYN8cuhbzf.ydV.Imqiz3n4BOX3fNWs1QRjS.', 6),
 (19, 'Haris', 'Haraitis', 'haris@gmail.com', '39412141314', '$2y$13$8leJUOgSrl9TKFGEO2HuPe.trnfn8dRC29lak1kREiTI47tCsJWi.', 6),
 (20, 'Rasa', 'Rasaitytė', 'rasa@gmail.com', '50005302012', '$2y$13$8jQ1DmZr730goWvhlsOWmu8k.nHnbAl0P1tQk5F4iyLiv7tHxt17G', 4),
 (21, 'vip', 'vipvip', 'vip@gmail.com', '8541212541', '$2y$13$BbLZGFsmMujfh77va0lV/uhufp7OEDiRE1XI2zwbGN.OmrvV.1fbG', 6),
@@ -126,7 +137,8 @@ INSERT INTO `asmuo` (`id`, `vardas`, `pavarde`, `el_pastas`, `asmens_kodas`, `sl
 (26, 'Ilona', 'Brazauskaitė', 'ilonabra@gmail.com', '49702041234', '$2y$13$8jQ1DmZr730goWvhlsOWmu8k.nHnbAl0P1tQk5F4iyLiv7tHxt17G', 4),
 (27, 'Indrė', 'Liepaitė', 'indrel@gmail.com', '48906221147', '$2y$13$.UW9Q8CpLHuz5OstW6FbUeESOmy8nzdLmxySc9DnokTxyXxy7essm', 5),
 (28, 'Dainius', 'Vileišis', 'dainiusv@gmail.com', '47803042369', '$2y$13$354N2Bhf881tSiMex3C.1O7HwPXgMVZA00o0r/bhGpKVCzcc.hEVW', 6),
-(30, 'Povilas', 'Povilaitis', 'povilasp@gmail.com', '38612142145', '$2y$13$vv57yJYK/y1/LxJFyYBkhOl7gBUHhJ1dJNdrUV6L9rYUnN1YhnG32', 5);
+(30, 'Povilas', 'Povilaitis', 'povilasp@gmail.com', '38612142145', '$2y$13$vv57yJYK/y1/LxJFyYBkhOl7gBUHhJ1dJNdrUV6L9rYUnN1YhnG32', 2),
+(31, 'Tadas', 'Tadaitis', 'tadas@gmail.com', '59645125122', '$2y$13$o8PV9bBFt9IcHEQPS6gv3ekkcRHh1oIhAJ9915iWfCNWxrNBZgJdy', 5);
 
 -- --------------------------------------------------------
 
@@ -146,9 +158,9 @@ CREATE TABLE IF NOT EXISTS `darbuotojas` (
 --
 
 INSERT INTO `darbuotojas` (`uzmokestis`, `id`) VALUES
-(350, '22'),
-(400, '23'),
-(450, '24');
+('350', 22),
+('400', 23),
+('450', 24);
 
 -- --------------------------------------------------------
 
@@ -179,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `iranga` (
   `tipas` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `tipas` (`tipas`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
 
 --
 -- Dumping data for table `iranga`
@@ -188,15 +200,16 @@ CREATE TABLE IF NOT EXISTS `iranga` (
 INSERT INTO `iranga` (`id`, `kokybe`, `isigijimo_data`, `tipas`) VALUES
 (1, 'gera', '2011-10-15', 1),
 (2, 'su pabraižymais', '2015-10-18', 1),
-(3, 'puiki', '2017-10-11', 2),
+(3, 'nebloga', '2017-10-11', 2),
 (5, 'ideali', '2017-12-01', 3),
 (6, 'l. gera', '2015-12-13', 1),
 (7, 'normali', '2015-06-15', 1),
-(8, 'puiki', '2017-10-15', 2),
 (9, 'nebloga', '2015-10-15', 2),
-(10, 'gera', '2016-07-16', 2),
+(10, 'gera', '2016-07-16', 3),
 (11, 'l. gera', '2017-05-15', 3),
-(12, 'su pabraižymais', '2016-12-08', 3);
+(12, 'su pabraižymais', '2016-12-08', 3),
+(13, 'l. puiki', '2017-10-15', 2),
+(15, 'l. gera', '2017-12-21', 1);
 
 -- --------------------------------------------------------
 
@@ -215,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `irangos_apmokejimas` (
   PRIMARY KEY (`id`),
   KEY `atlieka` (`fk_Narysid`),
   KEY `apmokama` (`fk_Irangaid`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
 
 --
 -- Dumping data for table `irangos_apmokejimas`
@@ -228,7 +241,6 @@ INSERT INTO `irangos_apmokejimas` (`id`, `suma`, `isnuomojimo_pradzia`, `isnuomo
 (7, '49', '2017-12-03', '2017-12-17', 13, 3),
 (8, '6', '2017-12-03', '2017-12-06', 20, 6),
 (9, '6', '2017-12-11', '2017-12-14', 28, 6),
-(10, '11', '2017-12-11', '2017-12-14', 28, 8),
 (11, '105', '2017-12-11', '2017-12-14', 28, 5),
 (12, '245', '2017-12-12', '2017-12-19', 12, 11);
 
@@ -297,7 +309,8 @@ INSERT INTO `narys` (`banko_kort_numeris`, `id`, `fk_Komandaid`) VALUES
 (NULL, 26, NULL),
 (NULL, 27, NULL),
 ('LT996586532085200000', 28, NULL),
-(NULL, 30, NULL);
+(NULL, 30, NULL),
+(NULL, 31, NULL);
 
 -- --------------------------------------------------------
 
@@ -340,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `rezultatas` (
   PRIMARY KEY (`id`),
   KEY `priklauso` (`fk_Aikstynasid`),
   KEY `seka_ir_registruoja` (`fk_Narysid`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
 
 --
 -- Dumping data for table `rezultatas`
@@ -355,7 +368,15 @@ INSERT INTO `rezultatas` (`id`, `raundas`, `musimu_sk`, `fk_Aikstynasid`, `fk_Na
 (11, 2, 20, 2, 13),
 (12, 3, 55, 3, 13),
 (13, 2, 20, 4, 28),
-(14, 3, 15, 4, 28);
+(14, 3, 15, 4, 28),
+(15, 5, 35, 1, 12),
+(16, 2, 26, 3, 12),
+(17, 1, 19, 1, 12),
+(18, 3, 56, 3, 12),
+(19, 5, 88, 4, 12),
+(20, 4, 39, 2, 12),
+(21, 2, 20, 1, 12),
+(22, 15, 20, 1, 13);
 
 -- --------------------------------------------------------
 
@@ -367,23 +388,23 @@ DROP TABLE IF EXISTS `stovejimo_aikstele`;
 CREATE TABLE IF NOT EXISTS `stovejimo_aikstele` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `vietos_nr` varchar(50) COLLATE utf8_lithuanian_ci NOT NULL,
-  `priskyrimo_data` date NULL,
-  `fk_Asmuoid` int(11) NULL,
+  `priskyrimo_data` date DEFAULT NULL,
+  `fk_Asmuoid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `fk_Asmuoid` (`fk_Asmuoid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
 
 --
 -- Dumping data for table `stovejimo_aikstele`
 --
 
 INSERT INTO `stovejimo_aikstele` (`id`, `vietos_nr`, `priskyrimo_data`, `fk_Asmuoid`) VALUES
-(1, 11, null, null),
-(2, 12, null, null),
-(3, 13, '2013-05-11', 20),
-(4, 14, '2017-11-01', 22),
-(5, 15, '2015-05-11', 23),
-(6, 16, null, null);
+(1, '11', NULL, NULL),
+(2, '12', NULL, NULL),
+(3, '13', '2013-05-11', 20),
+(4, '14', NULL, NULL),
+(5, '15', '2015-05-11', 23),
+(6, '16', '2017-12-13', 26);
 
 -- --------------------------------------------------------
 
@@ -408,13 +429,14 @@ CREATE TABLE IF NOT EXISTS `turnyras` (
 INSERT INTO `turnyras` (`id`, `fk_Zaidimo_rezervacijaid`, `fk_Narysid`) VALUES
 ('54a4775a3d69b2ade3028981e5ebc571', 12, 26),
 ('5ea948fb53717dafbd22b7967f181891', 4, 20),
+('6f149367b0c47f246a216bded5ac9c97', 12, 12),
 ('72c6798ee5f7591ca36b4e81b45272ab', 3, 13),
 ('925f1b1fdb6c78f055acbafdb1515c03', 4, 13),
 ('971ae6e9eb950ba00d156101ee6220c2', 3, 27),
 ('a83e98e96991898760ac3daf6aab95b7', 3, 26),
 ('c9ffbed93dbb7c09feb8b7da11206c6e', 12, 20),
 ('e04c5f98a9d212ddc190d861acda37f5', 12, 13),
-('f9c01c4d43ebd284b86e2d3632fcd789', 3, 12);
+('f1c45db09af65acb9e5a144df5305b83', 21, 12);
 
 -- --------------------------------------------------------
 
@@ -434,7 +456,7 @@ CREATE TABLE IF NOT EXISTS `zaidimo_rezervacija` (
   PRIMARY KEY (`id`),
   KEY `skiriama` (`fk_Aikstynasid`),
   KEY `sukuria_turnyra_rezervuoja_zaidima` (`fk_Narysid`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_lithuanian_ci;
 
 --
 -- Dumping data for table `zaidimo_rezervacija`
@@ -443,7 +465,7 @@ CREATE TABLE IF NOT EXISTS `zaidimo_rezervacija` (
 INSERT INTO `zaidimo_rezervacija` (`id`, `data`, `pradzios_laikas`, `pabaigos_laikas`, `pavadinimas`, `fk_Aikstynasid`, `fk_Narysid`) VALUES
 (2, '2017-12-03', '08:00:00', '11:00:00', 'Rezervacija', 2, 13),
 (3, '2017-12-30', '16:00:00', '21:00:00', 'Turnyras A', 3, 19),
-(4, '2017-12-07', '16:00:00', '21:00:00', 'Turnyras2', 1, 19),
+(4, '2017-12-07', '16:00:00', '21:00:00', 'Turnyras E', 1, 19),
 (5, '2017-12-01', '08:00:00', '11:00:00', 'Rezervacija', 2, 19),
 (6, '2017-12-01', '12:00:00', '15:00:00', 'Rezervacija', 3, 13),
 (10, '2017-12-20', '12:00:00', '15:00:00', 'Rezervacija', 4, 20),
@@ -457,7 +479,10 @@ INSERT INTO `zaidimo_rezervacija` (`id`, `data`, `pradzios_laikas`, `pabaigos_la
 (19, '2017-12-13', '08:00:00', '11:00:00', 'Rezervacija', 2, 13),
 (20, '2018-01-15', '16:00:00', '21:00:00', 'Turnyras C', 2, 28),
 (21, '2018-02-15', '16:00:00', '21:00:00', 'Turnyras D', 1, 28),
-(22, '2017-12-13', '08:00:00', '11:00:00', 'Rezervacija', 3, 12);
+(22, '2017-12-13', '08:00:00', '11:00:00', 'Rezervacija', 3, 12),
+(24, '2017-12-13', '12:00:00', '15:00:00', 'Rezervacija', 3, 12),
+(25, '2017-12-20', '12:00:00', '15:00:00', 'Rezervacija', 2, 12),
+(26, '2017-12-22', '08:00:00', '11:00:00', 'Rezervacija', 1, 12);
 
 --
 -- Constraints for dumped tables

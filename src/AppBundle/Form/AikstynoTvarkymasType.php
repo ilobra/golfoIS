@@ -39,6 +39,8 @@ class AikstynoTvarkymasType extends AbstractType
             'label'=> 'Pabaigos laikas: ',
             'disabled' => true,
             'widget' => 'single_text',
+            'model_timezone' => 'UTC',
+            // 'view_timezone' => $timeZoneName,
             'attr' => array('class'=>'form-control', 'style'=>'width:90%')
         ]);
     }/**

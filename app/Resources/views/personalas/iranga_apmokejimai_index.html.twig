@@ -1,0 +1,35 @@
+{% extends "::personnelmenu.html.twig" %}
+
+{% block body %}
+    <center>
+            <h3 class="divTitle">IRANGOS APMOKĖJIMAI</h3><br>
+
+            <center> <form method="get" action="">
+                    <label for="tipas">Pasirinkite tipą:</label>
+                    <input type="search" id="tipas" name="tipas">
+                    <input type="submit" class="btn btn-info" value="Pasirinkti tipą" />
+            </center>
+
+        <div style="width:50%">
+            <table id="PagalData" class="table table-striped">
+            <table class="table table-striped">
+            <thead>
+            <th>TIPAS</th>
+            <th>KOKYBĖ</th>
+            <th>NUOMOS TERMINAS</th>
+            <th>KAINA</th>
+            <th>MUOMININKAS</th>
+            </thead>
+                {% for ir in iranga %}
+                <thead>
+                <td> {{ ir.tipas }} </td>
+                <td> {{ ir.kokybe }} </td>
+                <td> <b>nuo:</b> {{ ir.isnuomojimoPradzia|date('Y-m-d') }}<br> <b>iki:</b> {{ ir.isnuomojimoPabaiga|date('Y-m-d') }}</td>
+                <td> {{ ir.suma }} €</td>
+                <td> {{ ir.elPastas }}</td>
+                </thead>
+                {% endfor %}
+        </table>
+    </div>
+</center>
+{% endblock %}

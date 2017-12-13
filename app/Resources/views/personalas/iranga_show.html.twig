@@ -1,0 +1,52 @@
+{% extends "::personnelmenu.html.twig" %}
+
+{% block body %}
+<div style="padding-left: 30px">
+    <div class="box" style="padding-left:30px; width:40%; border:1px solid #750b20; display:block; margin: auto">
+             <center><b><h3 class="divTitle">PASIRINKAS IRANGOS ĮRAŠAS</h3></b></center>
+             <div class="form-group">
+                <b><p class="divContent" >Kokybė:</p></b>
+                <input type="text" id="kokybe" style="width:80%;" class="form-control" name="kokybe" value="{{ iranga.getKokybe() }}" disabled/><br>
+
+                <b><p class="divContent" >Įsigijimo_data:</p></b>
+                <input type="date" id="data" style="width:80%;" class="form-control" name="data" value="{{ iranga.getIsigijimoData()|date('Y-m-d') }}" disabled/><br>
+
+                <b><p class="divContent" >Tipas:</p></b>
+                <input type="text" id="tipas" style="width:80%;" class="form-control" name="tipas" value="{{ iranga.getTipas().getName() }}" disabled/><br>
+
+        </div>
+    </div><br>
+        <center>
+        <form action="{{ path('iranga_index', {'id': asmuo.getId()}) }}">
+            <input type="submit"  class="btn btn-danger"value="Grįžti atgal" />
+        </form>
+        </center><br>
+
+        <center>
+            <h3 class="divTitle">Apmokėjimai pagal įrangą</h3><br>
+            {% if apmokejimai is not empty %}
+            <div style="width:50%">
+                <table id="PagalData" class="table table-striped">
+                    <table class="table table-striped">
+                        <thead>
+                        <th>TIPAS</th>
+                        <th>NUOMOS TERMINAS</th>
+                        <th>KAINA</th>
+                        </thead>
+                        {% for apm in apmokejimai %}
+                            <thead>
+                            <td> {{ apm.tipas }} </td>
+                            <td> <b>nuo:</b> {{ apm.isnuomojimoPradzia|date('Y-m-d') }}<br> <b>iki:</b> {{ apm.isnuomojimoPabaiga|date('Y-m-d') }}</td>
+                            <td> {{ apm.suma }} €</td>
+                            </thead>
+                        {% endfor %}
+                    </table>
+            </div>
+            {% else %}
+                <i><p> Nėra atliktų šios įrangos pirkimų </p></i><br>
+            {% endif %}
+        </center>
+
+
+
+{% endblock %}

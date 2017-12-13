@@ -25,6 +25,10 @@
                         {% if asmuo.getTipas() == 'golfo_aikstyno_darbuotojas' %}
                             <a href="{{ path('aikstyno_tvarkymas_index') }}" role="button" class="btn btn-info" style="width: 150px">Aikštyno tvarkymas</a>
                         {% endif %}
+                        {% if asmuo.getTipas() == 'irangos_nuomos_darbuotojas' %}
+                            <a href="{{ path('iranga_apmokejimai_index') }}" role="button" class="btn btn-info" style="width: 150px">Irangos apmokėjimai</a>
+                            <a href="{{ path('iranga_index') }}" role="button" class="btn btn-info" style="width: 150px">Irangos tvarkymas</a>
+                        {% endif %}
                         <a href="/logout" role="button" class="btn btn-danger" style="width: 150px; ">Atsijungti</a>
                     </form></li>
             </ul>

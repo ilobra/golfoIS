@@ -19,7 +19,7 @@
             <th>Ratio</th>
             </thead>
 
-            {% set count = 1 * page %}
+            {% set count = (page - 1) * limit + 1 %}
             {% for rezultatas in rezultatai %}
             <thead>
             <td> {{ count }}</td>

@@ -128,6 +128,7 @@ class VIPController extends Controller
                 'rezultatai' => $result,
                 'kiekis' => $count,
                 'page' => $request->query->getInt('page', 1),
+		'limit' => $request->query->getInt('limit', 10),
             )); 
 
 
